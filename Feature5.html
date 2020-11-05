@@ -72,10 +72,7 @@
       outline: none;  
     }  
     
-    div {  
-      padding: 10px 0;  
-    
-    } 
+  
 
     hr {  
       border: 1px solid #f1f1f1;  
@@ -100,30 +97,29 @@
   </style>
 
   <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
-        </button>
-        <a class="navbar-brand" href="#">ExpertFinder</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li ><a href="home.html">Home</a></li>
-          <li><a href="Feature2.html">Find Expert</a></li>
-          <li><a href="Feature3.html">My Profile</a></li>
-          <li><a href="Feature5.html">Register</a></li>
-          
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help </a></li>
-        </ul>
-      </div>
-    </div>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand active" href="#">ExpertFinder</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="home.html">Home</a></li>
+					<li><a href="Feature2.html">Find Expert</a></li>
+					<li><a href="Feature3.html">My Profile</a></li>
+					<li class="active"><a href="Feature5.html">Register</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help </a></li>
+				</ul>
+			</div>
+		</div>
   </nav>
 
   <form>  
@@ -187,6 +183,20 @@
         <input type="text" name="LinkedIn" placeholder="LinkedIn" size="10"/ required>  
       </div>
 
-     <a href="Feature3.html" class="registerbtn">Register</a>  
+      <button onclick="submitFunction()" class="registerbtn">Register</button>  
+	</div>
+</form>
+
+			
+<br></br>
+<footer class="container-fluid text-center">
+		<p>ExpertFinder is used for Oregon State students to connect with current students and/or alumni for networking opportunities in the computer science field</p>
+</footer>
+        <script>
+          function submitFunction() {
+            alert("Please check your email to confirm your registration!");
+          }
+        </script>
+
   </body>
 </html>
