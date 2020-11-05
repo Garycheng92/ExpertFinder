@@ -9,6 +9,7 @@
 
 
 	<!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h-->
+	<!--https://www.w3schools.com/bootstrap/bootstrap_ref_comp_glyphs.asp-->
 	<style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -41,6 +42,30 @@
       }
       .row.content {height:auto;} 
     }
+	
+	.center{
+	  margin: auto;
+	  width: 50%;
+	  padding: 10px;
+	}
+	
+	.leftside
+	{
+		float:left;
+		
+	}
+	.rightside
+	{
+		float:right;
+	
+	}
+
+
+	.glyphicon.glyphicon-user 
+	{
+		font-size: 40px;
+		padding-right:10px;
+	}
   </style>
 	
 	
@@ -111,17 +136,78 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="skillset">Select Industry</label>
+						<label for="skillset">Select Skillset</label>
 						<select name="skillset">
 							<option>All</option>
-							<option>Oregon State</option>
-							<option>Amazon</option>
-							<option>Google</option>
+							<option>C++</option>
+							<option>Python</option>
+							<option>React</option>
 						</select>
 					</div>
 					<button type="submit" class="btn btn-primary" >Find Expert</button>
 				</form>
-			<br></br>
+				<br></br>
+				<hr>
+				
+					<i>Showing approximately 200 results for...  Course: All; Industry: Google; Skillset: C++, Python  </i>
+				
+				<br></br>
+				<div>
+					<div class="list-group-item">
+						<div class="leftside">
+							<span class="glyphicon glyphicon-user"></span>
+						</div>
+						<div class="leftside">
+							<h4 class="list-group-item-heading">John Doe</h4>
+							<p class="list-group-item-text">Oregon State 21', M.S. CS</p>
+						</div>
+						<div class="rightside">
+							<button class="btn btn-primary">View Profile</button>
+						</div>
+						<br></br>
+					</div>
+					<br></br>
+					<div class="list-group-item">
+						<div class="leftside">
+							<span class="glyphicon glyphicon-user"></span>
+						</div>
+						<div class="leftside">
+							<h4 class="list-group-item-heading">Jane Doe</h4>
+							<p class="list-group-item-text">Oregon State 18', B.S. CS</p>
+						</div>
+						<div class="rightside">
+							<button class="btn btn-primary">View Profile</button>
+						</div>
+						<br></br>
+					</div>
+					<br></br>
+					<div class="list-group-item">
+						<div class="leftside">
+							<span class="glyphicon glyphicon-user"></span>
+						</div>
+						<div class="leftside">
+							<h4 class="list-group-item-heading">Billy Bob</h4>
+							<p class="list-group-item-text">Oregon State 11', B.S. CS</p>	
+						</div>
+						<div class="rightside">
+							<button class="btn btn-primary">View Profile</button>				
+						</div>
+						<br></br>
+					</div>
+				</div>
+					<br></br>
+		
+				<div class="center" >
+					<ul class="pagination">
+					  <li><a href="#">1</a></li>
+					  <li class="active"><a href="#">2</a></li>
+					  <li><a href="#">3</a></li>
+					  <li><a href="#">4</a></li>
+					  <li><a href="#">5</a></li>
+					  <li><a href="#">...</a></li>
+					  <li><a href="#">10</a></li>
+					</ul>
+				</div>
 			</div>
 			
 			<div class="col-sm-2 sidenav">
@@ -130,6 +216,7 @@
 		</div>
 	</div>
 
+	<br></br>
 	<footer class="container-fluid text-center">
 		<p>ExpertFinder is used for Oregon State students to connect with current students and/or alumni for networking opportunities in the computer science field</p>
 	</footer>
