@@ -80,19 +80,19 @@
 				<h1>Find an Expert</h1>
 				<h3> Search for Expert</h3>
 				<p>Search for expert by first name, last name, course, industry, or skill set.</p>
-				<form>
+				<form action="Feature2_no_results.html">
 					<div class="form-group">
 						<input type="text" class="form-control" id="searchVal">
 
 					</div>
-					<button type="submit" class="btn btn-primary" >Find Expert</button>
+					<button type="submit" class="btn btn-primary" action="Feature2_no_results.html" method="get" >Find Expert</button>
 					
 				</form>
 				<hr>
 
 				<h3>Filter for Expert</h3>
 				<p>Filter for expert by skillset, OSU courses, and/or industry. Select 'All' to not filter by the criteria.</p>
-				<form>
+				<form action="Feature2_expertlist.html">
 					<div class="form-group">
 						<label for="course">Select Courses</label>
 						<select name="course">
@@ -119,7 +119,7 @@
 							<option>Google</option>
 						</select>
 					</div>
-					<button type="submit" class="btn btn-primary" >Find Expert</button>
+					<button type="submit" class="btn btn-primary" action="Feature2_expertlist.html" method="get">Find Expert</button>
 				</form>
 				<br></br>
 				<hr>
