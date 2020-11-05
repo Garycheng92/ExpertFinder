@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <meta name="viewport content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h-->
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {   
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {
+        height:auto;
+      } 
+    }
+
+    .glyphicon.glyphicon-user {
+      font-size: 150px;
+      padding-top: 20px;
+    }
+
+    font-family: Calibri, Helvetica, sans-serif;  
+    background-color: pink;  
+    }  
+    
+    .container {  
+      padding: 50px;  
+      background-color: lightblue;  
+    }  
+      
+    input[type=text], input[type=password], textarea {  
+      width: 100%;  
+      padding: 15px;  
+      margin: 5px 0 22px 0;  
+      display: inline-block;  
+      border: none;  
+      background: #f1f1f1;  
+    }  
+
+    input[type=text]:focus, input[type=password]:focus {  
+      background-color: ;  
+      outline: none;  
+    }  
+    
+    div {  
+      padding: 10px 0;  
+    
+    } 
+
+    hr {  
+      border: 1px solid #f1f1f1;  
+      margin-bottom: 25px;  
+    }  
+    
+    .registerbtn {  
+      background-color: #4CAF50;  
+      color: white;  
+      padding: 16px 20px;  
+      margin: 8px 0;  
+      border: none;  
+      cursor: pointer;  
+      width: 100%;  
+      opacity: 0.9;  
+    }  
+    
+    .registerbtn:hover {  
+      opacity: 1;  
+    }  
+  
+  </style>
+
+  <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">ExpertFinder</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li ><a href="#">Home</a></li>
+          <li><a href="Feature2.html">Find Expert</a></li>
+          <li><a href="Feature3.html">My Profile</a></li>
+          <li><a href="Feature5.html">Sign Up</a></li>
+          
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help </a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <form>  
+    <div class="container">  
+      <center>  <h1> Expert Registeration Form</h1> </center>  
+      <hr>  
+      
+      <div>
+        <label>Sign Up for:</label>
+        </label><br>  
+        <input type="radio" value="Self" name="self" checked> Self  
+        <input type="radio" value="Friend" name="friend"> Friend 
+      </div>
+
+      <div>
+        <label>Upload Profile Picture: </lable>
+        <form action="/action_page.php">
+          <input type="file" id="myFile" name="filename">
+        </form>
+      </div>
+
+      <label> Firstname </label>   
+      <input type="text" name="firstname" placeholder= "Firstname" size="15" required />   
+      <label> Lastname: </label>    
+      <input type="text" name="lastname" placeholder="Lastname" size="15"required />   
+    
+      <div>  
+        <label>Gender :</label><br>  
+          <input type="radio" value="Male" name="gender" checked > Male   
+          <input type="radio" value="Female" name="gender"> Female   
+          <input type="radio" value="Other" name="gender"> Other  
+      </div>  
+
+      <label>Phone :</label>  
+      <input type="text" name="phone" placeholder="Phone no." size="10"/ required> 
+
+      <label for="email"><b>Email</b></label>  
+        <input type="text" placeholder="Enter Email" name="email" required>  
+
+      <div>  
+      <label>Tech Skillset:</label>  
+        <textarea cols="80" rows="5" value="address" required>  </textarea> 
+      </div>
+
+      <label>Past Courses:</label>  
+        <textarea cols="80" rows="5" value="address" required>  </textarea> 
+
+      <label>Industry/Organization:</label>  
+        <textarea cols="80" rows="5" value="address" required>  </textarea> 
+
+
+      <label>Github:</label>  
+        <input type="text" name="github" placeholder="Github" size="10"/ required> 
+
+      <label>Twitter </label>  
+        <input type="text" name="twitter" placeholder="Twitter" size="10"/ required>
+
+
+      <div>
+        <label>LinkedIn :</label>  
+        <input type="text" name="LinkedIn" placeholder="LinkedIn" size="10"/ required>  
+      </div>
+
+      <button onclick="submitFunction()" class="registerbtn">Register</button>  
+        <script>
+          function submitFunction() {
+            alert("Please check your email to confirm your registration!");
+          }
+        </script>
+
+  </body>
+</html>
