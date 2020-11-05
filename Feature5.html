@@ -9,22 +9,22 @@
 
   <!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h-->
   <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
     }
-    
+
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 450px}
-    
+
     /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
       background-color: #f1f1f1;
       height: 100%;
     }
-    
+
     /* Set black background color, white text and some padding */
     footer {
       background-color: #555;
@@ -32,16 +32,16 @@
       padding: 15px;
 
     }
-    
+
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
-      .sidenav {   
+      .sidenav {
         height: auto;
         padding: 15px;
       }
       .row.content {
         height:auto;
-      } 
+      }
     }
 
     .glyphicon.glyphicon-user {
@@ -49,51 +49,51 @@
       padding-top: 20px;
     }
 
-    font-family: Calibri, Helvetica, sans-serif;  
-    background-color: pink;  
-    }  
-    
-    .container {  
-      padding: 50px;  
-      background-color: lightblue;  
-    }  
-      
-    input[type=text], input[type=password], textarea {  
-      width: 100%;  
-      padding: 15px;  
-      margin: 5px 0 22px 0;  
-      display: inline-block;  
-      border: none;  
-      background: #f1f1f1;  
-    }  
+    /* font-family: Calibri, Helvetica, sans-serif;
+    background-color: pink;
+    }   */
 
-    input[type=text]:focus, input[type=password]:focus {  
-      background-color: ;  
-      outline: none;  
-    }  
-    
-  
+    .container {
+      padding: 50px;
+      background-color: lightblue;
+    }
 
-    hr {  
-      border: 1px solid #f1f1f1;  
-      margin-bottom: 25px;  
-    }  
-    
-    .registerbtn {  
-      background-color: #4CAF50;  
-      color: white;  
-      padding: 16px 20px;  
-      margin: 8px 0;  
-      border: none;  
-      cursor: pointer;  
-      width: 100%;  
-      opacity: 0.9;  
-    }  
-    
-    .registerbtn:hover {  
-      opacity: 1;  
-    }  
-  
+    input[type=text], input[type=password], textarea {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+      /* background-color:  */
+      outline: none;
+    }
+
+
+
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+
+    .registerbtn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+
+    .registerbtn:hover {
+      opacity: 1;
+    }
+
   </style>
 
   <body>
@@ -109,7 +109,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li><a href="home.html">Home</a></li>
+					<li><a href="index.html">Home</a></li>
 					<li><a href="Feature2.html">Find Expert</a></li>
 					<li><a href="Feature3.html">My Profile</a></li>
 					<li class="active"><a href="Feature5.html">Register</a></li>
@@ -122,16 +122,16 @@
 		</div>
   </nav>
 
-  <form>  
-    <div class="container">  
-      <center>  <h1> Expert Registeration Form</h1> </center>  
-      <hr>  
-      
+  <form>
+    <div class="container">
+      <center>  <h1> Expert Registeration Form</h1> </center>
+      <hr>
+
       <div>
         <label>Sign Up for:</label>
-        </label><br>  
-        <input type="radio" value="Self" name="self" checked> Self  
-        <input type="radio" value="Friend" name="friend"> Friend 
+        </label><br>
+        <input type="radio" value="Self" name="self" checked> Self
+        <input type="radio" value="Friend" name="friend"> Friend
       </div>
 
       <div>
@@ -141,53 +141,53 @@
         </form>
       </div>
 
-      <label> Firstname </label>   
-      <input type="text" name="firstname" placeholder= "Firstname" size="15" required />   
-      <label> Lastname: </label>    
-      <input type="text" name="lastname" placeholder="Lastname" size="15"required />   
-    
-      <div>  
-        <label>Gender :</label><br>  
-          <input type="radio" value="Male" name="gender" checked > Male   
-          <input type="radio" value="Female" name="gender"> Female   
-          <input type="radio" value="Other" name="gender"> Other  
-      </div>  
+      <label> Firstname </label>
+      <input type="text" name="firstname" placeholder= "Firstname" size="15" required />
+      <label> Lastname: </label>
+      <input type="text" name="lastname" placeholder="Lastname" size="15"required />
 
-      <label>Phone :</label>  
-      <input type="text" name="phone" placeholder="Phone no." size="10"/ required> 
-
-      <label for="email"><b>Email</b></label>  
-        <input type="text" placeholder="Enter Email" name="email" required>  
-
-      <div>  
-      <label>Tech Skillset:</label>  
-        <textarea cols="80" rows="5" value="address" required>  </textarea> 
+      <div>
+        <label>Gender :</label><br>
+          <input type="radio" value="Male" name="gender" checked > Male
+          <input type="radio" value="Female" name="gender"> Female
+          <input type="radio" value="Other" name="gender"> Other
       </div>
 
-      <label>Past Courses:</label>  
-        <textarea cols="80" rows="5" value="address" required>  </textarea> 
+      <label>Phone :</label>
+      <input type="text" name="phone" placeholder="Phone no." size="10"/ required>
 
-      <label>Industry/Organization:</label>  
-        <textarea cols="80" rows="5" value="address" required>  </textarea> 
+      <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+
+      <div>
+      <label>Tech Skillset:</label>
+        <textarea cols="80" rows="5" value="address" required>  </textarea>
+      </div>
+
+      <label>Past Courses:</label>
+        <textarea cols="80" rows="5" value="address" required>  </textarea>
+
+      <label>Industry/Organization:</label>
+        <textarea cols="80" rows="5" value="address" required>  </textarea>
 
 
-      <label>Github:</label>  
-        <input type="text" name="github" placeholder="Github" size="10"/ required> 
+      <label>Github:</label>
+        <input type="text" name="github" placeholder="Github" size="10"/ required>
 
-      <label>Twitter </label>  
+      <label>Twitter </label>
         <input type="text" name="twitter" placeholder="Twitter" size="10"/ required>
 
 
       <div>
-        <label>LinkedIn :</label>  
-        <input type="text" name="LinkedIn" placeholder="LinkedIn" size="10"/ required>  
+        <label>LinkedIn :</label>
+        <input type="text" name="LinkedIn" placeholder="LinkedIn" size="10"/ required>
       </div>
 
-      <button onclick="submitFunction()" class="registerbtn">Register</button>  
+      <button onclick="submitFunction()" class="registerbtn">Register</button>
 	</div>
 </form>
 
-			
+
 <br></br>
 <footer class="container-fluid text-center">
 		<p>ExpertFinder is used for Oregon State students to connect with current students and/or alumni for networking opportunities in the computer science field</p>
