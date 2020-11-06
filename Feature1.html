@@ -24,6 +24,13 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.org {
+    margin: auto;
+    width: 60%;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .hideform {
     display: none;
 }
@@ -188,8 +195,47 @@
     </form>
 </div>
 <button id="showCourse" class="btn btn-primary">Add Course</button>
+
+<h3>Industry</h3>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>Organization</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Oregon State</td>
+              <td>4 years</td>
+            </tr>
+            <tr>
+              <td>Google</td>
+              <td>2 years</td>
+            </tr>
+            <tr>
+              <td>Amazon</td>
+              <td>5 years</td>
+            </tr>
+          </tbody>
+        </table>
+<div class="org hideform">
+    <button id="closeOrg" style="float: right;">X</button>
+    <form action="/action_page.php">
+        Organization:<br>
+        <input type="text" name="org" value="Vanguard Solutions">
+        <br>
+        Duration:<br>
+        <input type="text" name="duration" value="2 years">
+        <br><br>
+        <input type="submit" value="Add Organization">
+    </form>
+</div>
+<button id="showOrg" class="btn btn-primary">Add Organization</button>
+
 <br></br>
       </div>
+
 
       <div class="col-sm-2 sidenav">
         <div class="well">
@@ -229,6 +275,17 @@ $('#closeCourse').on('click', function () {
     $('.other').hide();
     $('#showCourse').show();
 })
+
+$('#showOrg').on('click', function () {
+    $('.org').show();
+    $(this).hide();
+})
+
+$('#closeOrg').on('click', function () {
+    $('.org').hide();
+    $('#showOrg').show();
+})
+
 </script>
 
   </body>
