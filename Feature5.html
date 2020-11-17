@@ -5,6 +5,7 @@
   <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
   <!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h-->
@@ -119,92 +120,91 @@
 		</div>
   </nav>
 
-  <form>
-    <div class="container">
-      <center>  <h1> Expert Registeration Form</h1> </center>
-      <hr>
+<form method="post" action="Feature3.html" onsubmit="return checkForBlank()">
+  <div class="container">
+    <center>  <h1> Expert Registeration Form</h1> </center>
+    <hr>
 
-      <div>
-        <label>Sign Up for:</label>
-        </label><br>
-        <input type="radio" value="Self" name="self" checked> Self
+    <div>
+      <label>Sign Up for:</label>
+      </label><br>
+      <input type="radio" value="Self" name="self" checked> Self
+      &nbsp;
+      <input type="radio" value="Friend" name="friend"> Friend
+    </div>
+
+    &nbsp;
+
+    <div>
+      <label>Upload Profile Picture: </lable>
+      <form action="/action_page.php">
+        <input type="file" id="myFile" name="filename">
+      </form>
+    </div>
+
+    &nbsp;
+
+    <div>
+      <label> First Name </label>
+      <input id="firstname" type="text" name="firstname" placeholder= "First Name" size="15" required />
+    </div>
+
+    <div>
+      <label> Last Name: </label>
+      <input id="lastname" type="text" name="lastname" placeholder="Last Name" size="15"required />
+    </div>
+
+    <div>
+      <label>Gender :</label><br>
+        <input type="radio" value="Male" name="gender" checked > Male
         &nbsp;
-        <input type="radio" value="Friend" name="friend"> Friend
-      </div>
+        <input type="radio" value="Female" name="gender"> Female
+        &nbsp;
+        <input type="radio" value="Other" name="gender"> Other
+    </div>
+    
+    &nbsp;
 
-      &nbsp;
+    <div>
+      <label>Phone :</label>
+      <input type="text" name="phone" placeholder="Phone No." size="10"/ required>
+    </div>
 
-      <div>
-        <label>Upload Profile Picture: </lable>
-        <form action="/action_page.php">
-          <input type="file" id="myFile" name="filename">
-        </form>
-      </div>
+    <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Email" name="email" required>
 
-      &nbsp;
+    <div>
+    <label>Tech Skillset:</label>
+      <textarea cols="80" rows="5" value="address" required>  </textarea>
+    </div>
 
-      <div>
-        <label> First Name </label>
-        <input type="text" name="firstname" placeholder= "First Name" size="15" required />
-      </div>
+    <label>Past Courses:</label>
+      <textarea cols="80" rows="5" value="address" required>  </textarea>
 
-      <div>
-        <label> Last Name: </label>
-        <input type="text" name="lastname" placeholder="Last Name" size="15"required />
-      </div>
+    <label>Industry/Organization:</label>
+      <textarea cols="80" rows="5" value="address" required>  </textarea>
 
-      <div>
-        <label>Gender :</label><br>
-          <input type="radio" value="Male" name="gender" checked > Male
-          &nbsp;
-          <input type="radio" value="Female" name="gender"> Female
-          &nbsp;
-          <input type="radio" value="Other" name="gender"> Other
-      </div>
-      
-      &nbsp;
+    <label>Github:</label>
+      <input type="text" name="github" placeholder="Github" size="10"/ required>
 
-      <div>
-        <label>Phone :</label>
-        <input type="text" name="phone" placeholder="Phone No." size="10"/ required>
-      </div>
+    <label>Twitter </label>
+      <input type="text" name="twitter" placeholder="Twitter" size="10"/ required>
 
-      <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Email" name="email" required>
+    <div>
+      <label>LinkedIn:</label>
+      <input type="text" name="LinkedIn" placeholder="LinkedIn" size="10"/ required>
+    </div>
 
-      <div>
-      <label>Tech Skillset:</label>
-        <textarea cols="80" rows="5" value="address" required>  </textarea>
-      </div>
-
-      <label>Past Courses:</label>
-        <textarea cols="80" rows="5" value="address" required>  </textarea>
-
-      <label>Industry/Organization:</label>
-        <textarea cols="80" rows="5" value="address" required>  </textarea>
-
-      <label>Github:</label>
-        <input type="text" name="github" placeholder="Github" size="10"/ required>
-
-      <label>Twitter </label>
-        <input type="text" name="twitter" placeholder="Twitter" size="10"/ required>
-
-      <div>
-        <label>LinkedIn :</label>
-        <input type="text" name="LinkedIn" placeholder="LinkedIn" size="10"/ required>
-      </div>
-
-      <a href="Feature3.html" class="btn-block registerbtn" role="button">Register</a>
-
-
-	</div>
+    <input type="Submit" class="btn-block registerbtn" role="button">
+  </div>
 </form>
 
-
-<br></br>
 <footer class="container-fluid text-center">
-		<p>ExpertFinder is used for Oregon State students to connect with current students and/or alumni for networking opportunities in the computer science field</p>
+	<p>ExpertFinder is used for Oregon State students to connect with current students and/or alumni for networking opportunities in the computer science field</p>
 </footer>
 
-  </body>
+<script>
+</script>
+
+</body>
 </html>
