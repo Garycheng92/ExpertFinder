@@ -137,8 +137,8 @@
           </tbody>
         </table>
 
-        <div class="center hideform">
-    <button id="close" style="float: right;">X</button>
+        <div class="skills hideform">
+    <button id="closeSkill" style="float: right;">X</button>
     <form action="/action_page.php">
         Skill:<br>
         <input type="text" name="skill" value="Python">
@@ -149,7 +149,7 @@
         <input type="submit" value="Add SKill">
     </form>
 </div>
-<button id="show" class="btn btn-primary ">Add Skill</button>
+<button id="showSkill" class="btn btn-primary ">Add Skill</button>
 
         <h3>Past Coursework</h3>
         <table class="table">
@@ -181,7 +181,7 @@
           </tbody>
         </table>
 
-        <div class="other hideform">
+        <div class="course hideform">
     <button id="closeCourse" style="float: right;">X</button>
     <form action="/action_page.php">
         Skill:<br>
@@ -261,31 +261,32 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-  $('#show').on('click', function () {
-    $('.center').show();
+
+
+  $('#showSkill').on('click', function () {
+    $('.skills').show();
     $(this).hide();
 })
-
-$('#close').on('click', function () {
-    $('.center').hide();
-    $('#show').show();
+$('#closeSkill').on('click', function () {
+    $('.skills').hide();
+    $('#showSkill').show();
 })
+
 
  $('#showCourse').on('click', function () {
-    $('.other').show();
+    $('.course').show();
     $(this).hide();
 })
-
 $('#closeCourse').on('click', function () {
-    $('.other').hide();
+    $('.course').hide();
     $('#showCourse').show();
 })
+
 
 $('#showOrg').on('click', function () {
     $('.org').show();
     $(this).hide();
 })
-
 $('#closeOrg').on('click', function () {
     $('.org').hide();
     $('#showOrg').show();
