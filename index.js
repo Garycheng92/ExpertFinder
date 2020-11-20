@@ -16,7 +16,7 @@ app.set('view engine', 'handlebars');
 app.set('port',1234);
 
 const filterQuery=require('./sqlF2Filter')
-
+const reformatData=require('./reformat')
 
 app.get('/', (req, res) => {
   res.send('hello world');
@@ -34,9 +34,7 @@ app.get('/signup', (req, res) => {
 //render activities schedule page, prepopulate dropdowns.
 app.get('/Feature2', function(req, res)
 {
-    console.log('inside get');
 	q=filterQuery.pf
-	var inserts=[req.body.dogID, req.body.overnight, req.body.duration, req.body.stayEnd, req.body.stayStart, req.body.stayCost];
 	mysql.pool.query(q,function (error, results) 
 	{
 		if(error)
@@ -46,36 +44,12 @@ app.get('/Feature2', function(req, res)
 		}
 		else
 		{	
-			obj={}
-			skills=[]
-			industries=[]
-			courses=[]
-			for (var i=0; i < results.length; i++)
-			{
-				var item=results[i];
-				if (item.course=='course')
-				{
-					courses.push(item.courseName)
-				}
-				else if (item.course =='skill')
-				{
-					skills.push(item.courseName)
-				}
-				else
-				{
-					industries.push(item.courseName)
-				}
-				
-			}
-			
-			obj.skillList=skills
-			obj.courseList=courses
-			obj.indList=industries
-
+			data=reformatData.reformatSQL1(results)
 			res.render('Feature2',{data:obj});
 		}
 	});
 });
+
 
 
 
