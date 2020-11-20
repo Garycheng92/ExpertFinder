@@ -1,5 +1,5 @@
 
-//this feature remformats the query for populating the drop downs
+//this feature remformats the query for populating the drop downs.
 module.exports.reformatSQL1=function(data)
 {
 	obj={}
@@ -20,10 +20,8 @@ module.exports.reformatSQL1=function(data)
 		else
 		{
 			industries.push(item.courseName)
-		}
-		
+		}	
 	}
-	
 	obj.skillList=skills
 	obj.courseList=courses
 	obj.indList=industries
