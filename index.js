@@ -1,13 +1,19 @@
-var express = require('express');
+const express = require('express');
+const app = express();
+var mysql = require('./dbcon.js');
+var bodyParser = require('body-parser');
+const CORS=require('cors');
+var port = process.argv[2];
+var path = require('path');
 
-var app = express();
-
-var exphbs = require('express-handlebars');
-app.engine('handlebars', exphbs());
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(CORS());
+var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+app.use(bodyParser.json());
+app.engine('handlebars', handlebars.engine);
+app.set('mysql', mysql);
 app.set('view engine', 'handlebars');
-
-app.use(express.urlencoded({extended:false }));
-app.use(express.json());
 
 app.set('port', 1234);
 
