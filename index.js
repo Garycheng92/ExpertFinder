@@ -31,7 +31,7 @@ app.get('/signup', (req, res) => {
 });
 
 
-//render activities schedule page, prepopulate dropdowns.
+//render activities schedule page, prepopulate dropdowns
 app.get('/Feature2', function(req, res)
 {
 	q=filterQuery.pf
