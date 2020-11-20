@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.engine('handlebars', handlebars.engine);
 app.set('mysql', mysql);
 app.set('view engine', 'handlebars');
-app.set('port',4344);
+app.set('port',1234);
 
 const filterQuery=require('./sqlF2Filter')
 
