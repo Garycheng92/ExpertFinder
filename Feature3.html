@@ -12,57 +12,70 @@
 	<style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
+		margin-bottom: 0;
+		border-radius: 0;
     }
 
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
+    .row.content {
+    	height: 450px;
+    }
 
     /* Set gray background color and 100% height */
     .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
+		padding-top: 20px;
+		background-color: #f1f1f1;
+		height: 100%;
     }
 
     /* Set black background color, white text and some padding */
     footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-      bottom: 0;
-      width: 100%
+		background-color: #555;
+		color: white;
+		padding: 15px;
+		bottom: 0;
+		width: 100%
     }
 
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;}
+    	.sidenav {
+    		height: auto;
+        	padding: 15px;
+      	}
+    	.row.content {
+    		height:auto;
+    	}
     }
 
     .glyphicon.glyphicon-user {
-    	font-size: 150px;
-    	padding-top: 20px;
+		font-size: 150px;
+		padding-top: 20px;
     }
 
-		.hint-container {
-  background-color: #BBA6A1;
-  padding: 20px;
-  display: none;
-		}
+	.hint-container {
+		background-color: #BBA6A1;
+		padding: 20px;
+		display: none;
+	}
 
-		.hint:hover + .hint-container {
-  display: block;
-}
+	.hint:hover + .hint-container {
+  		display: block;
+	}
 
-
-
-
-  </style>
+	.contact-popup .contact-content {
+		position: fixed;
+		padding: 0,0,0,0;
+		left: 32.5%;
+		height: 40%;
+		width: 35%;
+		text-align: center;
+		box-sizing: border-box;
+		transform: scale(0);
+		background: #f1f1f1;
+		z-index: 2;
+	}
+  	</style>
 
 
 
@@ -128,6 +141,18 @@
 			<div class="col-sm-8 text-left">
 				<span class="glyphicon glyphicon-user"></span>
 				<h1>John Doe</h1>
+
+				<div class="contact-popup" id="contact-popup">
+					<div class="contact-dim"></div>
+					<div class="contact-content">
+						<div class="contact-close">Close</div>
+						<h1>Title</h1>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo aspernatur laborum rem sed laudantium excepturi veritatis voluptatum architecto, dolore quaerat totam officiis nisi animi accusantium alias inventore nulla atque debitis.</p>
+					</div>
+				</div>
+
+				<button>View Contact Details</button>
+				
 				<h3>Software Development Engineer -- Amazon</h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 				<hr>
