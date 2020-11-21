@@ -67,14 +67,19 @@
 		position: fixed;
 		padding-left: 10px;
 		padding-right: 10px;
-		left: 32.5%;
-		height: 40%;
-		width: 35%;
+		left: 40%;
+		height: 400px;
+		width: 20%;
 		text-align: left;
 		box-sizing: border-box;
 		transform: scale(0);
-		background: #f1f1f1;
+		background: #ffffff;
 		z-index: 2;
+	}
+
+	.contact-popup .contact-field {
+		font-size: 19px;
+		font-weight: 500;
 	}
 
 	.contact-popup.active .contact-content {
@@ -98,6 +103,11 @@
 		display: block;
 	}
 
+	.contact-content hr {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
 	.contact-popup .contact-close {
 		position: absolute;
 		bottom: 20px;
@@ -109,6 +119,10 @@
 		font-size: 20px;
 		text-align: center;
 		cursor: pointer;
+	}
+
+	#contact-popup-hr {
+		border: 1px solid #dddddd;
 	}
   	</style>
 
@@ -187,11 +201,12 @@
 					<div class="contact-content">
 						<div class="contact-close" onclick="toggleContact()">Close</div>
 						<h2>John Doe</h2>
-						<p>Phone<br>+1 (123)-456-7890 (Work)</p>
-						<p>Email<br><a href="mailto:john_doe@oregonstate.edu">john_doe@oregonstate.edu</a></p>
-						<p>GitHub<br><a href="https://github.com/" target="_blank">github.com/johndoe123</a></p>
-						<p>LinkedIn<br><a href="https://www.linkedin.com/" target="_blank">linkedin.com/in/johndoe1</a></p>
-						<p>Twitter<br><a href="https://twitter.com/home" target="_blank">JDoe</a></p>
+						<hr id="contact-popup-hr">
+						<p><span class="contact-field">Phone</span><br>+1 (123)-456-7890 (Work)</p>
+						<p><span class="contact-field">Email</span><br><a href="mailto:john_doe@oregonstate.edu">john_doe@oregonstate.edu</a></p>
+						<p><span class="contact-field">GitHub</span><br><a href="https://github.com/" target="_blank">github.com/johndoe123</a></p>
+						<p><span class="contact-field">LinkedIn</span><br><a href="https://www.linkedin.com/" target="_blank">linkedin.com/in/johndoe1</a></p>
+						<p><span class="contact-field">Twitter</span><br><a href="https://twitter.com/home" target="_blank">JDoe</a></p>
 					</div>
 				</div>
 
