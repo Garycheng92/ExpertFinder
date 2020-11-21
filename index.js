@@ -53,13 +53,11 @@ app.get('/Feature2_expertlist', function(req, res)
 {
 	q=filterQuery.pf
 	q2=filterQuery.s
-	console.log(req.query)
 	search=[req.query.skillset]
 	mysql.pool.query(q,function (error, results) 
 	{
 		if(error)
 		{
-			console.log(results);
 			res.render('404');
 		}
 		else
@@ -69,20 +67,16 @@ app.get('/Feature2_expertlist', function(req, res)
 			{
 				if(error)
 				{
-					console.log(results2);
 					res.render('404');
 				}
 				else
 				{	temp=[]
 					for(const i in results2)
 					{
-						console.log(i, results2[i])
 						var newResults=results[i]
 						temp.push(newResults)	
 					}
 					data.experts=temp
-					console.log(temp)
-					console.log({data:obj})
 					res.render('Feature2_expertlist',{data:obj});
 				}
 			});
@@ -95,12 +89,10 @@ app.get('/Feature2_expertlist', function(req, res)
 app.get('/Feature2_no_results', function(req, res)
 {
 	q=filterQuery.pf
-	console.log(req.query)
 	mysql.pool.query(q,function (error, results) 
 	{
 		if(error)
 		{
-			console.log(results);
 			res.render('404');
 		}
 		else
