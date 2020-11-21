@@ -3,11 +3,9 @@ const app = express();
 var mysql = require('./dbcon.js');
 var bodyParser = require('body-parser');
 const CORS=require('cors');
-var port = process.argv[2];
 var path = require('path');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 app.use(bodyParser.urlencoded({extended:false}));
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(CORS());
 app.use(bodyParser.json());
 app.engine('handlebars', handlebars.engine);
@@ -19,7 +17,7 @@ const filterQuery=require('./sqlF2Filter')
 const reformatData=require('./reformat')
 
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.render('home');
 });
 
 app.get('/home', (req, res) => {
@@ -39,7 +37,6 @@ app.get('/Feature2', function(req, res)
 	{
 		if(error)
 		{
-			console.log(results);
 			res.render('404');
 		}
 		else
@@ -51,7 +48,69 @@ app.get('/Feature2', function(req, res)
 });
 
 
+//render expert data and prepopulate dropdowns.
+app.get('/Feature2_expertlist', function(req, res)
+{
+	q=filterQuery.pf
+	q2=filterQuery.s
+	console.log(req.query)
+	search=[req.query.skillset]
+	mysql.pool.query(q,function (error, results) 
+	{
+		if(error)
+		{
+			console.log(results);
+			res.render('404');
+		}
+		else
+		{	
+			data=reformatData.reformatSQL1(results)
+			mysql.pool.query(q2,search,function (error, results2) 
+			{
+				if(error)
+				{
+					console.log(results2);
+					res.render('404');
+				}
+				else
+				{	temp=[]
+					for(const i in results2)
+					{
+						console.log(i, results2[i])
+						var newResults=results[i]
+						temp.push(newResults)	
+					}
+					data.experts=temp
+					console.log(temp)
+					console.log({data:obj})
+					res.render('Feature2_expertlist',{data:obj});
+				}
+			});
+		}
+	});
+});
 
+
+//render expert data and prepopulate dropdowns.
+app.get('/Feature2_no_results', function(req, res)
+{
+	q=filterQuery.pf
+	console.log(req.query)
+	mysql.pool.query(q,function (error, results) 
+	{
+		if(error)
+		{
+			console.log(results);
+			res.render('404');
+		}
+		else
+		{	
+			data=reformatData.reformatSQL1(results)
+			data.errorMsg="Error! No results were found. Try again using the filters to narrow down your search."
+			res.render('Feature2_no_results',{data:obj});
+		}
+	});
+});
 
 app.use(function(req,res){
   res.type('text/plain');
