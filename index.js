@@ -28,19 +28,24 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 });
 
+app.get('/user/:id', (req, res) => {
+	var id = req.params.id
+  res.render(':id/profile');
+});
+
 
 //render activities schedule page, prepopulate dropdowns
 app.get('/Feature2', function(req, res)
 {
 	q=filterQuery.pf
-	mysql.pool.query(q,function (error, results) 
+	mysql.pool.query(q,function (error, results)
 	{
 		if(error)
 		{
 			res.render('404');
 		}
 		else
-		{	
+		{
 			data=reformatData.reformatSQL1(results)
 			res.render('Feature2',{data:obj});
 		}
@@ -54,16 +59,16 @@ app.get('/Feature2_expertlist', function(req, res)
 	q=filterQuery.pf
 	q2=filterQuery.s
 	search=[req.query.skillset]
-	mysql.pool.query(q,function (error, results) 
+	mysql.pool.query(q,function (error, results)
 	{
 		if(error)
 		{
 			res.render('404');
 		}
 		else
-		{	
+		{
 			data=reformatData.reformatSQL1(results)
-			mysql.pool.query(q2,search,function (error, results2) 
+			mysql.pool.query(q2,search,function (error, results2)
 			{
 				if(error)
 				{
@@ -74,7 +79,7 @@ app.get('/Feature2_expertlist', function(req, res)
 					for(const i in results2)
 					{
 						var newResults=results[i]
-						temp.push(newResults)	
+						temp.push(newResults)
 					}
 					data.experts=temp
 					res.render('Feature2_expertlist',{data:obj});
@@ -89,14 +94,14 @@ app.get('/Feature2_expertlist', function(req, res)
 app.get('/Feature2_no_results', function(req, res)
 {
 	q=filterQuery.pf
-	mysql.pool.query(q,function (error, results) 
+	mysql.pool.query(q,function (error, results)
 	{
 		if(error)
 		{
 			res.render('404');
 		}
 		else
-		{	
+		{
 			data=reformatData.reformatSQL1(results)
 			data.errorMsg="Error! No results were found. Try again using the filters to narrow down your search."
 			res.render('Feature2_no_results',{data:obj});
