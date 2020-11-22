@@ -62,7 +62,7 @@
   		display: block;
 	}
 
-	.contact-popup .contact-content {
+	#contact-content {
 		position: fixed;
 		padding-left: 10px;
 		padding-right: 10px;
@@ -76,17 +76,12 @@
 		z-index: 2;
 	}
 
-	.contact-popup .contact-field {
-		font-size: 19px;
-		font-weight: 500;
-	}
-
-	.contact-popup.active .contact-content {
+	#contact-content.active {
 		transition: all 200ms ease-in-out;
 		transform: scale(1);
 	}
 
-	.contact-popup .contact-dim {
+	#contact-dim {
 		position: fixed;
 		top: 0px;
 		left: 0px;
@@ -98,16 +93,16 @@
 		display: none;
 	}
 
-	.contact-popup.active .contact-dim {
+	#contact-dim.active {
 		display: block;
 	}
 
-	.contact-content hr {
-		margin-top: 0px;
-		margin-bottom: 0px;
+	.contact-field {
+		font-size: 19px;
+		font-weight: 500;
 	}
 
-	.contact-popup .contact-close {
+	.contact-close {
 		position: absolute;
 		bottom: 20px;
 		left: 37.5%;
@@ -117,7 +112,8 @@
 
   	<script type="text/javascript">
   		function toggleContact(){
-  			document.getElementById("contact-popup").classList.toggle("active");
+  			document.getElementById("contact-content").classList.toggle("active");
+  			document.getElementById("contact-dim").classList.toggle("active");
   		}
   	</script>
 
@@ -184,21 +180,22 @@
 			<div class="col-sm-8 text-left">
 				<span class="glyphicon glyphicon-user"></span>
 				<h1>John Doe</h1>
-				<div class="contact-popup" id="contact-popup">
-					<div class="contact-dim"></div>
-					<div class="contact-content">
-						<div class="contact-close btn btn-primary" onclick="toggleContact()">Close</div>
-						<h2>John Doe</h2>
-						<hr style="border: 1px solid #dddddd">
-						<p><span class="contact-field">Phone</span><br>+1 (123)-456-7890 (Work)</p>
-						<p><span class="contact-field">Email</span><br><a href="mailto:john_doe@oregonstate.edu">john_doe@oregonstate.edu</a></p>
-						<p><span class="contact-field">GitHub</span><br><a href="https://github.com/" target="_blank">github.com/johndoe123</a></p>
-						<p><span class="contact-field">LinkedIn</span><br><a href="https://www.linkedin.com/" target="_blank">linkedin.com/in/johndoe1</a></p>
-						<p><span class="contact-field">Twitter</span><br><a href="https://twitter.com/home" target="_blank">JDoe</a></p>
-					</div>
+
+				<!-- Contact Details Popup Toggle -->
+				<div id="contact-dim"></div>
+				<div id="contact-content">
+					<div class="contact-close btn btn-primary" onclick="toggleContact()">Close</div>
+					<h2>John Doe</h2>
+					<hr style="margin-top:0px;margin-bottom:0px;border:1px solid #dddddd">
+					<p><span class="contact-field">Phone</span><br>+1 (123)-456-7890 (Work)</p>
+					<p><span class="contact-field">Email</span><br><a href="mailto:john_doe@oregonstate.edu">john_doe@oregonstate.edu</a></p>
+					<p><span class="contact-field">GitHub</span><br><a href="https://github.com/" target="_blank">github.com/johndoe123</a></p>
+					<p><span class="contact-field">LinkedIn</span><br><a href="https://www.linkedin.com/" target="_blank">linkedin.com/in/johndoe1</a></p>
+					<p><span class="contact-field">Twitter</span><br><a href="https://twitter.com/home" target="_blank">JDoe</a></p>
 				</div>
 
 				<button class="btn btn-primary" onclick="toggleContact()">View Contact Details</button>
+				<!-- Contact Details Popup Toggle -->
 
 				<h3>Software Development Engineer -- Amazon</h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
