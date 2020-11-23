@@ -1,13 +1,16 @@
 const express = require('express');
 const app = express();
+const CORS=require('cors');
+const path = require('path');
 const nodemailer = require('nodemailer');
 const env = require('dotenv').config();
+const filterQuery=require('./sqlF2Filter')
+const reformatData=require('./reformat')
 
 var mysql = require('./dbcon.js');
 var bodyParser = require('body-parser');
-const CORS=require('cors');
-const path = require('path');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(CORS());
 app.use(bodyParser.json());
@@ -16,21 +19,22 @@ app.set('mysql', mysql);
 app.set('view engine', 'handlebars');
 app.set('port',1234);
 
-const filterQuery=require('./sqlF2Filter')
-const reformatData=require('./reformat')
-
+//for testing purpose only...should link to handlebar
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+//for testing purpose only...should  link to handlebar
 app.get('/index.html', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+//for testing purpose only...should link to handlebar
 app.get('/Feature3.html', (req, res) => {
   res.sendFile(path.join(__dirname + '/Feature3.html'));
 });
 
+//for testing purpose only... should link to handlebar
 app.get('/Feature5.html', (req, res) => {
   res.sendFile(path.join(__dirname + '/Feature5.html'));
   console.log("This is the form that shows")
@@ -160,17 +164,18 @@ async function main() {
     	   <p>You are receiving this email because it was used to sign up for expertFinder.</p>	
 	       <p>Signed Up As: ${req.body.signup}<br>
 	          First Name: ${req.body.firstname}<br>
-     		    Last Name: ${req.body.lastname}<br>
+     		  Last Name: ${req.body.lastname}<br>
        		  Gender: ${req.body.gender}<br>
        		  Phone: ${req.body.phone}<br>
-	   		    Email: ${req.body.email}<br>
+	          Email: ${req.body.email}<br>
        		  Tech Skillset: ${req.body.techskillset}<br>
        		  Past Courses: ${req.body.pastcourses}<br>
        		  Industry/Organization: ${req.body.industry}<br>
 	          Github: ${req.body.github}<br>
-            Twitter: ${req.body.twitter}<br>
-            LinkedIn: ${req.body.LinkedIn}</p>
-		     <p><a href="http://flip1.engr.oregonstate.edu:1234/Feature3.html">Click here to activate your account</a></p>`
+                  Twitter: ${req.body.twitter}<br>
+                  LinkedIn: ${req.body.LinkedIn}</p>
+                  <!--better way to link??-->
+		  <p><a href="http://flip1.engr.oregonstate.edu:1234/Feature3.html">Click here to activate your account</a></p>`
   });
 
   console.log("Email sent successfully!");
@@ -180,7 +185,6 @@ async function main() {
 main().catch(console.error);  
 
 });
-
 
 app.use(function(req,res){
   res.type('text/plain');

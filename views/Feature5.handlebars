@@ -120,7 +120,7 @@
 		</div>
   </nav>
 
-<form onsubmit="confirmInput()" method="post" action="Feature5.html">
+<form  method="post" action="Feature5.html">
   <div class="container">
     <center>  <h1> Expert Registeration Form</h1> </center>
     <hr>
@@ -210,11 +210,10 @@ On submission, shows alert then closes current window and redirects to home page
   function confirmInput() {
     var r = confirm("Please check your email to finish your registration. You will now be redirect to the home page");
       if (r == true) {
-        //window.close() does not work well in chrome
-        //doesn't work the first time sometimes.....
-        //find diff way?
+        //window.close() does not work in chrome
         //https://stackoverflow.com/questions/2032640/issue-with-window-close-and-chrome
-        setTimeout(window.top.close, 500);
+        //*****Find a better way to redirect****** 
+        setTimeout(window.close, 0);
         window.open('index.html');
       }
       return false;
@@ -223,5 +222,6 @@ On submission, shows alert then closes current window and redirects to home page
 
 </body>
 </html>
+
 
 
