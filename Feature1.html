@@ -71,7 +71,61 @@
       font-size: 150px;
       padding-top: 20px;
     }
+
+    #contact-content {
+      position: fixed;
+      padding-left: 10px;
+      padding-right: 10px;
+      left: 40%;
+      height: 400px;
+      width: 20%;
+      text-align: left;
+      box-sizing: border-box;
+      transform: scale(0);
+      background: #ffffff;
+      z-index: 2;
+    }
+
+    #contact-content.active {
+      transition: all 200ms ease-in-out;
+      transform: scale(1);
+    }
+
+    #contact-dim {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      height: 100vh;
+      width: 100vw;
+      background: #000000;
+      opacity: 0.8;
+      z-index: 1;
+      display: none;
+    }
+
+    #contact-dim.active {
+      display: block;
+    }
+
+    .contact-field {
+      font-size: 19px;
+      font-weight: 500;
+    }
+
+    .contact-close {
+      position: absolute;
+      bottom: 20px;
+      left: 37.5%;
+      width: 25%;
+    }
   </style>
+
+  <script type="text/javascript">
+    function toggleContact(){
+      document.getElementById("contact-content").classList.toggle("active");
+      document.getElementById("contact-dim").classList.toggle("active");
+    }
+  </script>
 
   <head><title>Expert Finder - Edit Profile</title></head>
 
@@ -90,7 +144,7 @@
         <ul class="nav navbar-nav">
           <li ><a href="index.html">Home</a></li>
           <li><a href="Feature2.html">Find Expert</a></li>
-          <li><a href="Feature3.html">My Profile</a></li>
+          <li class="active"><a href="Feature3.html">My Profile</a></li>
           <li><a href="Feature5.html">Register</a></li>
 
         </ul>
@@ -111,11 +165,29 @@
       </div>
       <div class="col-sm-8 text-left">
         <span class="glyphicon glyphicon-user"></span>
-		<h1>John Doe</h1>
-		<h3>Software Development Engineer -- Amazon</h3>
+		<h1 style="margin-bottom:5px">John Doe</h1>
+    <p style="font-size:25px;font-weight:500">Software Development Engineer -- Amazon</p>
+
+    <!-- Contact Details Popup Toggle -->
+    <div id="contact-dim"></div>
+    <div id="contact-content">
+      <div class="contact-close btn btn-primary" onclick="toggleContact()">Close</div>
+      <h2>John Doe</h2>
+      <hr style="margin-top:0px;margin-bottom:0px;border:1px solid #dddddd">
+      <p><span class="contact-field">Phone</span><br>+1 (123)-456-7890 (Work)</p>
+      <p><span class="contact-field">Email</span><br><a href="mailto:john_doe@oregonstate.edu">john_doe@oregonstate.edu</a></p>
+      <p><span class="contact-field">GitHub</span><br><a href="https://github.com/" target="_blank">github.com/johndoe123</a></p>
+      <p><span class="contact-field">LinkedIn</span><br><a href="https://www.linkedin.com/" target="_blank">linkedin.com/in/johndoe1</a></p>
+      <p><span class="contact-field">Twitter</span><br><a href="https://twitter.com/home" target="_blank">JDoe</a></p>
+    </div>
+
+    <button class="btn btn-primary" onclick="toggleContact()">View Contact Details</button>
+    <!-- Contact Details Popup Toggle -->
+
+		<h3>Overview</h3>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-    <a href='Feature1_Edit_Profile.html'><button type="button" class="btn btn-default">Edit Profile</button></a>
+    <a href='Feature1_Edit_Profile.html'><button type="button" class="btn btn-default">Edit Overview</button></a>
 
         <hr>
         <h3>Skills</h3>
@@ -124,7 +196,8 @@
             <tr>
               <th>Skills</th>
               <th>Experience</th>
-
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -158,7 +231,7 @@
         Years Experience:<br>
         <input type="text" name="Years Experience" value="2 Years">
         <br><br>
-        <input type="submit" value="Add SKill">
+        <input type="submit" value="Add Skill">
     </form>
 </div>
 <button id="show" class="btn btn-primary ">Add Skill</button>
@@ -169,6 +242,8 @@
             <tr>
               <th>Coursework</th>
               <th>Year</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -196,13 +271,13 @@
         <div class="other hideform">
     <button id="closeCourse" style="float: right;">X</button>
     <form action="/action_page.php">
-        Skill:<br>
+        Coursework:<br>
         <input type="text" name="course" value="CS 290 - Web Development">
         <br>
         Year Taken:<br>
         <input type="text" name="yearTaken" value="Winter 2019">
         <br><br>
-        <input type="submit" value="Add SKill">
+        <input type="submit" value="Add Course">
     </form>
 </div>
 <button id="showCourse" class="btn btn-primary">Add Course</button>
@@ -213,6 +288,8 @@
             <tr>
               <th>Organization</th>
               <th>Duration</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

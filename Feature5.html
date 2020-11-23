@@ -120,23 +120,22 @@
 		</div>
   </nav>
 
-<form method="post" action="Feature3.html" onsubmit="return checkForBlank()">
+<form onsubmit="confirmInput()" method="post" action="Feature5.html">
   <div class="container">
     <center>  <h1> Expert Registeration Form</h1> </center>
     <hr>
 
     <div>
-      <label>Sign Up for:</label>
-      </label><br>
-      <input type="radio" value="Self" name="self" checked> Self
-      &nbsp;
-      <input type="radio" value="Friend" name="friend"> Friend
+      <label>Sign Up for:</label><br>
+        <input type="radio" value="Self" name="signup" checked> Self
+        &nbsp;
+        <input type="radio" value="Friend" name="signup"> Friend
     </div>
 
     &nbsp;
 
     <div>
-      <label>Upload Profile Picture: </lable>
+      <label>Upload Profile Picture: </label>
       <form action="/action_page.php">
         <input type="file" id="myFile" name="filename">
       </form>
@@ -175,14 +174,14 @@
 
     <div>
     <label>Tech Skillset:</label>
-      <textarea cols="80" rows="5" value="address" required>  </textarea>
+      <textarea cols="80" rows="5" name="techskillset" value="address" required>  </textarea>
     </div>
 
     <label>Past Courses:</label>
-      <textarea cols="80" rows="5" value="address" required>  </textarea>
+      <textarea cols="80" rows="5" name="pastcourses" value="address" required>  </textarea>
 
     <label>Industry/Organization:</label>
-      <textarea cols="80" rows="5" value="address" required>  </textarea>
+      <textarea cols="80" rows="5" name="industry" value="address" required>  </textarea>
 
     <label>Github:</label>
       <input type="text" name="github" placeholder="Github" size="10"/ required>
@@ -194,17 +193,33 @@
       <label>LinkedIn:</label>
       <input type="text" name="LinkedIn" placeholder="LinkedIn" size="10"/ required>
     </div>
-
-    <input type="Submit" class="btn-block registerbtn" role="button">
-  </div>
+    
+    <input onclick="confirmInput()" type="Submit" value="Register" input name="submit" class="btn-block registerbtn" role="button">
+    
+  </div>  
 </form>
 
 <footer class="container-fluid text-center">
 	<p>ExpertFinder is used for Oregon State students to connect with current students and/or alumni for networking opportunities in the computer science field</p>
 </footer>
 
+<!--https://stackoverflow.com/questions/31729644/javascript-redirect-submitted-form-after-clicking-ok-in-the-alert-box
+On submission, shows alert then closes current window and redirects to home page.-->
+
 <script>
+  function confirmInput() {
+    var r = confirm("Please check your email to finish your registration. You will now be redirect to the home page");
+      if (r == true) {
+        //window.close() does not work in chrome
+        //https://stackoverflow.com/questions/2032640/issue-with-window-close-and-chrome
+        setTimeout(window.close, 0);
+        window.open('index.html');
+      }
+      return false;
+  }
 </script>
 
 </body>
 </html>
+
+

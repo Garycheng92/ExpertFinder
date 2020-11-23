@@ -8,40 +8,45 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 
+
 	<!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h-->
 	<style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
+		margin-bottom: 0;
+		border-radius: 0;
     }
 
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
+    .row.content {
+    	height: 450px;
+    }
 
     /* Set gray background color and 100% height */
     .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
+		padding-top: 20px;
+		background-color: #f1f1f1;
+		height: 100%;
     }
 
     /* Set black background color, white text and some padding */
     footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-      bottom: 0;
-      width: 100%
+		background-color: #555;
+		color: white;
+		padding: 15px;
+		bottom: 0;
+		width: 100%
     }
 
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;}
+		.sidenav {
+			height: auto;
+			padding: 15px;
+		}
+        .row.content {
+      		height:auto;
+        }
     }
 
     .glyphicon.glyphicon-user {
@@ -49,20 +54,72 @@
     	padding-top: 20px;
     }
 
-		.hint-container {
-  background-color: #BBA6A1;
-  padding: 20px;
-  display: none;
-		}
+	.hint-container {
+		background-color: #BBA6A1;
+		padding: 20px;
+		display: none;
+	}
 
-		.hint:hover + .hint-container {
-  display: block;
-}
+	.hint:hover + .hint-container {
+		display: block;
+	}
+
+	#contact-content {
+		position: fixed;
+		padding-left: 10px;
+		padding-right: 10px;
+		left: 40%;
+		height: 400px;
+		width: 20%;
+		text-align: left;
+		box-sizing: border-box;
+		transform: scale(0);
+		background: #ffffff;
+		z-index: 2;
+	}
+
+	#contact-content.active {
+		transition: all 200ms ease-in-out;
+		transform: scale(1);
+	}
+
+	#contact-dim {
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		height: 100vh;
+		width: 100vw;
+		background: #000000;
+		opacity: 0.8;
+		z-index: 1;
+		display: none;
+	}
+
+	#contact-dim.active {
+		display: block;
+	}
+
+	.contact-field {
+		font-size: 19px;
+		font-weight: 500;
+	}
+
+	.contact-close {
+		position: absolute;
+		bottom: 20px;
+		left: 37.5%;
+		width: 25%;
+	}
+	</style>
 
 
 
-
-  </style>
+  	<script type="text/javascript">
+  		function toggleContact(){
+  			document.getElementById("contact-content").classList.toggle("active");
+  			document.getElementById("contact-dim").classList.toggle("active");
+  		}
+  	</script>
 
 
 
@@ -126,9 +183,26 @@
 			</div>
 			<div class="col-sm-8 text-left">
 				<span class="glyphicon glyphicon-user"></span>
-				<h1>John Doe</h1>
-				<h2>John.Doe@osu.edu</h2>
-				<h3>Software Development Engineer -- Amazon</h3>
+				<h1 style="margin-bottom:5px">John Doe</h1>
+				<p style="font-size:25px;font-weight:500">Software Development Engineer -- Amazon</p>
+
+				<!-- Contact Details Popup Toggle -->
+				<div id="contact-dim"></div>
+				<div id="contact-content">
+					<div class="contact-close btn btn-primary" onclick="toggleContact()">Close</div>
+					<h2>John Doe</h2>
+					<hr style="margin-top:0px;margin-bottom:0px;border:1px solid #dddddd">
+					<p><span class="contact-field">Phone</span><br>+1 (123)-456-7890 (Work)</p>
+					<p><span class="contact-field">Email</span><br><a href="mailto:john_doe@oregonstate.edu">john_doe@oregonstate.edu</a></p>
+					<p><span class="contact-field">GitHub</span><br><a href="https://github.com/" target="_blank">github.com/johndoe123</a></p>
+					<p><span class="contact-field">LinkedIn</span><br><a href="https://www.linkedin.com/" target="_blank">linkedin.com/in/johndoe1</a></p>
+					<p><span class="contact-field">Twitter</span><br><a href="https://twitter.com/home" target="_blank">JDoe</a></p>
+				</div>
+
+				<button class="btn btn-primary" onclick="toggleContact()">View Contact Details</button>
+				<!-- Contact Details Popup Toggle -->
+
+				<h3>Overview</h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 				<hr>
 				<h3>Skills</h3>
@@ -200,7 +274,8 @@
 						</tr>
 					</tbody>
 				</table>
-				<a href='Feature2_expertlist.html'><button type="button" class="btn btn-primary btn-lg">Back to Results</button></a>
+				<a href='Feature2_expertlist.html'><button type="button" class="btn btn-primary">Back to Results</button></a>
+				<hr>
 			</div>
 			<div class="col-sm-2 sidenav">
 				<div class="well">

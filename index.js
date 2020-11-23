@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
+const nodemailer = require('nodemailer');
+const env = require('dotenv').config();
+
 var mysql = require('./dbcon.js');
 var bodyParser = require('body-parser');
 const CORS=require('cors');
-var path = require('path');
+const path = require('path');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(CORS());
@@ -17,15 +20,20 @@ const filterQuery=require('./sqlF2Filter')
 const reformatData=require('./reformat')
 
 app.get('/', (req, res) => {
-  res.render('home');
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/home', (req, res) => {
-  res.render('home');
+app.get('/index.html', (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/signup', (req, res) => {
-  res.render('signup');
+app.get('/Feature3.html', (req, res) => {
+  res.sendFile(path.join(__dirname + '/Feature3.html'));
+});
+
+app.get('/Feature5.html', (req, res) => {
+  res.sendFile(path.join(__dirname + '/Feature5.html'));
+  console.log("This is the form that shows")
 });
 
 app.get('/user/:user_id', async (req, res) => {
@@ -121,6 +129,59 @@ app.get('/Feature2_no_results', function(req, res)
 	});
 });
 
+app.post('/Feature5.html', (req, res) => {
+  "use strict";
+
+// async..await is not allowed in global scope, must use a wrapper
+async function main() {
+
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    service: 'gmail', // true for 465, false for other ports
+    auth: {
+      user: 'expertFinder123123@gmail.com', // generated ethereal user
+      pass: '123456789!@#' // generated ethereal password
+    }
+  });
+
+  //*******login to gmail account.
+  //       go to account
+  //       turn ON Less secure app access
+  //       after this when you try to send mail from your app you will get error .
+  //       than go to Security issues found ( it's first option in security tab of google account )
+  //****** here you need to verify that last activities is verified and its you .
+   
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: 'expertFinder123123@gmail.com', // sender address 
+    to: `${req.body.email}`, // email based on user input 
+    subject: "Verify your expertFinder registration", // Subject line
+    html: `<h1> Welcome to expertFinder!<h1>
+    	   <p>You are receiving this email because it was used to sign up for expertFinder.</p>	
+	       <p>Signed Up As: ${req.body.signup}<br>
+	          First Name: ${req.body.firstname}<br>
+     		    Last Name: ${req.body.lastname}<br>
+       		  Gender: ${req.body.gender}<br>
+       		  Phone: ${req.body.phone}<br>
+	   		    Email: ${req.body.email}<br>
+       		  Tech Skillset: ${req.body.techskillset}<br>
+       		  Past Courses: ${req.body.pastcourses}<br>
+       		  Industry/Organization: ${req.body.industry}<br>
+	          Github: ${req.body.github}<br>
+            Twitter: ${req.body.twitter}<br>
+            LinkedIn: ${req.body.LinkedIn}</p>
+		     <p><a href="http://flip1.engr.oregonstate.edu:1234/Feature3.html">Click here to activate your account</a></p>`
+  });
+
+  console.log("Email sent successfully!");
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+}
+
+main().catch(console.error);  
+
+});
+
+
 app.use(function(req,res){
   res.type('text/plain');
   res.status(404);
@@ -133,8 +194,6 @@ app.use(function(err, req, res, next){
   res.status(500);
   res.send('500 - Server Error');
 });
-
-
 
 app.listen(app.get('port'), function(){
   console.log(
