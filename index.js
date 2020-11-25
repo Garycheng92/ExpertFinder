@@ -6,10 +6,15 @@ const nodemailer = require('nodemailer');
 const env = require('dotenv').config();
 const filterQuery=require('./sqlF2Filter')
 const reformatData=require('./reformat')
+const filterLogic=require('./getFilterQuery')
+const search_expert=require('./Search')
+const expert=require('./Expert')
 
 var mysql = require('./dbcon.js');
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+
+
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(CORS());
@@ -58,77 +63,94 @@ app.get('/user/:user_id', async (req, res) => {
 });
 
 
-//render activities schedule page, prepopulate dropdowns
+//renders intial search for expert page.
 app.get('/Feature2', function(req, res)
 {
 	q=filterQuery.pf
-	mysql.pool.query(q,function (error, results)
+	mysql.pool.query(q,function (error, results) 
 	{
 		if(error)
 		{
+			console.log(results);
 			res.render('404');
 		}
 		else
-		{
+		{	
 			data=reformatData.reformatSQL1(results)
-			res.render('Feature2',{data:obj});
+			res.render('Feature2',{data});
 		}
 	});
 });
 
 
-//render expert data and prepopulate dropdowns.
+//render activities schedule page, prepopulate dropdowns.
 app.get('/Feature2_expertlist', function(req, res)
 {
 	q=filterQuery.pf
-	q2=filterQuery.s
-	search=[req.query.skillset]
-	mysql.pool.query(q,function (error, results)
+	q_object=filterLogic.getFilterQuery(req.query)
+	
+
+	console.log(q_object)
+	console.log(req.query)
+	
+	mysql.pool.query(q,function (error, results) 
 	{
 		if(error)
 		{
+			console.log(results);
 			res.render('404');
 		}
 		else
-		{
+		{	
 			data=reformatData.reformatSQL1(results)
-			mysql.pool.query(q2,search,function (error, results2)
+			data.search=req.query
+			mysql.pool.query(q_object.queryString,q_object.searchParams,function (error, results2) 
 			{
 				if(error)
 				{
+					console.log(error)
 					res.render('404');
 				}
+				else if (!results2.length)
+				{
+					console.log(results2)
+					res.render('Feature2_no_results',{data});
+				}
 				else
-				{	temp=[]
+				{	let expertList=[]
 					for(const i in results2)
 					{
-						var newResults=results[i]
-						temp.push(newResults)
+						var newResults=results2[i]
+						var exp=new expert.Expert(newResults.fName,newResults.lName,newResults.profileTitle,newResults.profileBio,newResults.profileImage)
+						expertList.push({newExp:exp})
 					}
-					data.experts=temp
-					res.render('Feature2_expertlist',{data:obj});
+				
+					data.experts=expertList
+					console.log(data)
+					res.render('Feature2_expertlist',{data});
 				}
 			});
 		}
+
 	});
 });
 
 
-//render expert data and prepopulate dropdowns.
+//render activities schedule page, prepopulate dropdowns.
 app.get('/Feature2_no_results', function(req, res)
 {
 	q=filterQuery.pf
-	mysql.pool.query(q,function (error, results)
+	mysql.pool.query(q,function (error, results) 
 	{
 		if(error)
 		{
+			console.log(results);
 			res.render('404');
 		}
 		else
-		{
+		{	
 			data=reformatData.reformatSQL1(results)
-			data.errorMsg="Error! No results were found. Try again using the filters to narrow down your search."
-			res.render('Feature2_no_results',{data:obj});
+			res.render('Feature2_no_results',{data});
 		}
 	});
 });
