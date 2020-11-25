@@ -4,18 +4,14 @@ const CORS=require('cors');
 const path = require('path');
 const nodemailer = require('nodemailer');
 const env = require('dotenv').config();
-const filterQuery=require('./sqlF2Filter')
-const reformatData=require('./reformat')
-const filterLogic=require('./getFilterQuery')
-const search_expert=require('./Search')
-const expert=require('./Expert')
 
-var mysql = require('./dbcon.js');
+var mysql = require('./AppModules/dbcon.js');
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
 
-
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'AppModules')));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(CORS());
 app.use(bodyParser.json());
@@ -23,6 +19,12 @@ app.engine('handlebars', handlebars.engine);
 app.set('mysql', mysql);
 app.set('view engine', 'handlebars');
 app.set('port',1234);
+
+const filterQuery=require('./AppModules/sqlF2Filter');
+const reformatData=require('./AppModules/reformat');
+const filterLogic=require('./AppModules/getFilterQuery');
+const search_expert=require('./AppModules/Search');
+const expert=require('./AppModules/Expert');
 
 //for testing purpose only...should link to handlebar
 app.get('/', (req, res) => {
