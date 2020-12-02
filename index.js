@@ -43,36 +43,20 @@ app.get('/Feature5_Registration_Page.html', (req, res) => {
   console.log("This is the form that shows");
 });
 
-app.get('/user/:user_id', async (req, res) => {
-  try {
-    const profile = await Profile.findOne({user: req.params.user_id}).populate('user', ['name']);
-
-    if (!profile)
-      return res.status(400).json({msg: 'Profile not Found'});
-
-    res.json(profile);
-  } catch (err) {
-    console.error(err.message);
-    if (err.kind === 'ObjectId') {
-      return res.status(400).json({msg: 'Profile not Found'})
-    }
-    res.status(500).send('Server Error');
-  }
-});
 
 
 //renders intial search for expert page.
 app.get('/Feature2', function(req, res)
 {
 	q=filterQuery.pf
-	mysql.pool.query(q,function (error, results) 
+	mysql.pool.query(q,function (error, results)
 	{
 		if(error)
 		{
 			res.render('404');
 		}
 		else
-		{	
+		{
 			data=reformatData.reformatSQL1(results)
 			res.render('Feature2',{data});
 		}
@@ -83,14 +67,14 @@ app.get('/Feature2', function(req, res)
 app.get('/Feature2_no_results', function(req, res)
 {
 	q=filterQuery.pf
-	mysql.pool.query(q,function (error, results) 
+	mysql.pool.query(q,function (error, results)
 	{
 		if(error)
 		{
 			res.render('404');
 		}
 		else
-		{	
+		{
 			data=reformatData.reformatSQL1(results)
 			res.render('Feature2_no_results',{data});
 		}
@@ -131,14 +115,14 @@ app.get('/Feature2_expertlist', function(req, res){
 	q=filterQuery.pf
 	q_object=filterLogic.getFilterQuery(req.query)
 	console.log('inside feature 2 expertlist get')
-	mysql.pool.query(q,function (error, results) 
+	mysql.pool.query(q,function (error, results)
 	{
 		if(error){res.render('404')}
 		else
-		{	
+		{
 			data=reformatData.reformatSQL1(results)
 			data.search=req.query
-			mysql.pool.query(q_object.queryString,q_object.searchParams,function (error, results2) 
+			mysql.pool.query(q_object.queryString,q_object.searchParams,function (error, results2)
 			{
 				if(error)
 				{
@@ -149,7 +133,7 @@ app.get('/Feature2_expertlist', function(req, res){
 					res.render('Feature2_no_results',{data});
 				}
 				else
-				{	
+				{
 					let expertList=[]
 					for(const i in results2)
 					{
@@ -159,7 +143,7 @@ app.get('/Feature2_expertlist', function(req, res){
 					}
 					//sort by rank for number of occurences if search bar
 					expertList.sort((a,b) => (a.rank > b.rank) ? 1 : ((b.rank > a.rank) ? -1 : 0))
-					
+
 					// assign pages: 5 per page
 					var numPages=0
 					expertPage=[]
@@ -200,8 +184,8 @@ app.get('/Feature2_expertlist', function(req, res){
 
 //render for Feature3 (expert profile)
 app.get('/Feature3', function(req, res){
-	q=filterQuery.pf
-	mysql.pool.query(q, function(error, results){
+	var sql ='SELECT * FROM user'
+	mysql.pool.query(sql, function(error, results){
 		if(error){
 			res.render('404');
 		}
@@ -232,14 +216,14 @@ async function main() {
   //       after this when you try to send mail from your app you will get error .
   //       than go to Security issues found ( it's first option in security tab of google account )
   //****** here you need to verify that last activities is verified and its you .
-   
+
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: 'expertFinder123123@gmail.com', // sender address 
-    to: `${req.body.email}`, // email based on user input 
+    from: 'expertFinder123123@gmail.com', // sender address
+    to: `${req.body.email}`, // email based on user input
     subject: "Verify your expertFinder registration", // Subject line
     html: `<h1> Welcome to expertFinder!<h1>
-    	   <p>You are receiving this email because it was used to sign up for expertFinder.</p>	
+    	   <p>You are receiving this email because it was used to sign up for expertFinder.</p>
 	       <p>Signed Up As: ${req.body.signup}<br>
 	          First Name: ${req.body.firstname}<br>
      		  Last Name: ${req.body.lastname}<br>
@@ -260,7 +244,7 @@ async function main() {
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 }
 
-main().catch(console.error);  
+main().catch(console.error);
 
 });
 
