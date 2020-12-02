@@ -73,7 +73,6 @@ app.get('/Feature2', function(req, res)
 	{
 		if(error)
 		{
-			console.log(results);
 			res.render('404');
 		}
 		else
@@ -84,61 +83,7 @@ app.get('/Feature2', function(req, res)
 	});
 });
 
-
-//render activities schedule page, prepopulate dropdowns.
-app.get('/Feature2_expertlist', function(req, res)
-{
-	q=filterQuery.pf
-	q_object=filterLogic.getFilterQuery(req.query)
-	
-
-	console.log(q_object)
-	console.log(req.query)
-	
-	mysql.pool.query(q,function (error, results) 
-	{
-		if(error)
-		{
-			console.log(results);
-			res.render('404');
-		}
-		else
-		{	
-			data=reformatData.reformatSQL1(results)
-			data.search=req.query
-			mysql.pool.query(q_object.queryString,q_object.searchParams,function (error, results2) 
-			{
-				if(error)
-				{
-					console.log(error)
-					res.render('404');
-				}
-				else if (!results2.length)
-				{
-					console.log(results2)
-					res.render('Feature2_no_results',{data});
-				}
-				else
-				{	let expertList=[]
-					for(const i in results2)
-					{
-						var newResults=results2[i]
-						var exp=new expert.Expert(newResults.fName,newResults.lName,newResults.profileTitle,newResults.profileBio,newResults.profileImage)
-						expertList.push({newExp:exp})
-					}
-				
-					data.experts=expertList
-					console.log(data)
-					res.render('Feature2_expertlist',{data});
-				}
-			});
-		}
-
-	});
-});
-
-
-//render activities schedule page, prepopulate dropdowns.
+//render main search for expert page
 app.get('/Feature2_no_results', function(req, res)
 {
 	q=filterQuery.pf
@@ -146,7 +91,6 @@ app.get('/Feature2_no_results', function(req, res)
 	{
 		if(error)
 		{
-			console.log(results);
 			res.render('404');
 		}
 		else
@@ -156,6 +100,107 @@ app.get('/Feature2_no_results', function(req, res)
 		}
 	});
 });
+
+
+
+// reads temp file to gather data - USED FOR PAGENATION
+app.post('/Feature2_expertlist', function(req,res){
+	q_pg=req.body.newPage
+	var data={}
+	fs.readFile('./temp.json', 'utf8', function (err, results) {
+		if (err) {res.render('404');}
+		else{
+			data = JSON.parse(results);
+			var expertPage=[];
+			//modify which experts are displayed
+			for (var i=0; i < data.experts.length; i++){
+				var Exp=data.experts[i]
+				if (Exp.newExp.page==q_pg){expertPage.push(Exp)}
+			}
+			data.experts=expertPage;
+			//change which page is currently selected
+			for (var i=0; i < data.pages.length; i++){
+				var npg=data.pages[i];
+				if (npg.pageNum.page == q_pg){npg.pageNum.selected=true}
+				else if (npg.pageNum.selected && npg.pageNum.page != q_pg){delete npg.pageNum.selected}
+			}
+			res.render('Feature2_expertlist', {data})
+		}
+	})
+})
+
+
+//render activities schedule page, prepopulate dropdowns.
+app.get('/Feature2_expertlist', function(req, res){
+	q=filterQuery.pf
+	q_object=filterLogic.getFilterQuery(req.query)
+	console.log('inside feature 2 expertlist get')
+	mysql.pool.query(q,function (error, results) 
+	{
+		if(error){res.render('404')}
+		else
+		{	
+			data=reformatData.reformatSQL1(results)
+			data.search=req.query
+			mysql.pool.query(q_object.queryString,q_object.searchParams,function (error, results2) 
+			{
+				if(error)
+				{
+					res.render('404');
+				}
+				else if (!results2.length)
+				{
+					res.render('Feature2_no_results',{data});
+				}
+				else
+				{	
+					let expertList=[]
+					for(const i in results2)
+					{
+						var newResults=results2[i]
+						var exp=new expert.Expert(newResults.userID,newResults.fName,newResults.lName,newResults.profileTitle,newResults.profileBio,newResults.profileImage, newResults.frequency)
+						expertList.push({newExp:exp})
+					}
+					//sort by rank for number of occurences if search bar
+					expertList.sort((a,b) => (a.rank > b.rank) ? 1 : ((b.rank > a.rank) ? -1 : 0))
+					
+					// assign pages: 5 per page
+					var numPages=0
+					expertPage=[]
+					for(var j=0; j < expertList.length; j++)
+					{
+						if (j % 5 == 0){numPages++}
+						var exprt=expertList[j];
+						exprt.newExp.setPage(numPages);
+						if (numPages==1){expertPage.push({newExp:exprt.newExp})}
+					}
+					//create object for selected page
+					pagenation=[];
+					for(var j=0; j < numPages; j++)
+					{
+						var pg = {}
+						pg.page=(j+1)
+						if (j==0){pg.selected=true}
+						pagenation.push({pageNum:pg});
+					}
+					data.pages=pagenation;
+					data.experts=expertList;
+					//save all expert data pulled to file and render page
+					fs.writeFile('./temp.json', JSON.stringify(data), err =>{
+						if (err){
+							res.render('404');
+						}
+						else{
+							data.experts=expertPage;
+							res.render('Feature2_expertlist',{data});
+						}
+					})
+				}
+			})
+		}
+
+	})
+})
 
 app.post('/Feature5.html', (req, res) => {
   "use strict";
