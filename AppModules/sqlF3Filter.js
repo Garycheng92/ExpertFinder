@@ -9,4 +9,7 @@ var qProfileCourse = `(SELECT Users.userID, Course.courseName, CourseTerms.cours
 						INNER JOIN Course ON User_Course.courseID=Course.courseID
 						INNER JOIN CourseTerms ON User_Course.courseTermID=CourseTerms.courseTermID);`
 
-var qProfileIndustry = ``
+var qProfileIndustry = `(SELECT Users.userID, Industry.industryName, User_Industry.yearsExperience
+						FROM expertfinderdb.Users
+						INNER JOIN User_Industry ON Users.UserID=User_Industry.userID
+						INNER JOIN Industry ON User_Industry.industryID=Industry.industryID);`
