@@ -1,4 +1,29 @@
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">ExpertFinder</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+					<li class="active"><a href="http://flip3.engr.oregonstate.edu:4212/Feature2_expertlist">Find Expert</a></li>
+					<li><a href="Feature3.html">My Profile</a></li>
+					<li><a href="Feature5.html">Register</a></li>
 
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help </a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
 	<div class="container-fluid text-center">
 		<div class="row content">
 			<div class="col-sm-2 sidenav">
@@ -8,17 +33,17 @@
 				<h1>Find an Expert</h1>
 				<h3> Search for Expert</h3>
 				<p>Search for expert by first name, last name, course, industry, or skill set.</p>
-				<form action="http://flip3.engr.oregonstate.edu:4211/Feature2_no_results" method="get">
+				<form action="http://flip3.engr.oregonstate.edu:4212/Feature2_expertlist" method="get">
 					<div class="form-group">
-						<input type="text" class="form-control" id="searchVal">
-
+						<label for="searchVal"></label>
+						<input type="text" class="form-control" id="searchVal" name="searchVal"/>
 					</div>
 					<input type="submit" class="btn btn-primary" value="Find Expert"/>
 				</form>
 				<hr>
 				<h3>Filter for Expert</h3>
 				<p>Filter for expert by skillset, OSU courses, and/or industry. Select 'All' to not filter by the criteria.</p>
-				<form method="get" action="http://flip3.engr.oregonstate.edu:4211/Feature2_expertlist">
+				<form method="get" action="http://flip3.engr.oregonstate.edu:4212/Feature2_expertlist">
 					<div class="form-group">
 						<h4>Select Courses</h4>
 						<select name="course" multiple>
@@ -50,7 +75,7 @@
 				</form>
 				<br></br>
 				<hr>
-					<i>Showing approximately  results for... 
+					<i>Showing results for... 
 					{{#each data.search}} 
 					{{@key}}: {{this}} 
 					{{/each}}  
@@ -72,7 +97,11 @@
 							<p class="list-group-item-text">{{newExp.profileTitle}}</p>
 						</div>
 						<div class="rightside">
-							<button class="btn btn-primary" onclick="window.location.href='http://flip3.engr.oregonstate.edu:4211/Feature3_otheruser'">View Profile</button>
+							<form method="get" action="http://flip3.engr.oregonstate.edu:4212/user/:user_id">
+								<label for='user_id' hidden></label>
+								<input name='user_id' id='user_id' type="hidden" value={{newExp.userID}} />
+								<input type="submit" class="btn btn-primary" value="View Profile"/>
+							</form>
 						</div>
 						<br></br>
 					</div>
@@ -84,16 +113,25 @@
 					<br></br>
 
 				<div class="center" >
+				
+				
 					<ul class="pagination">
-					  <li><a href="#">1</a></li>
-					  <li class="active"><a href="#">2</a></li>
-					  <li><a href="http://flip3.engr.oregonstate.edu:4211/Feature2_expertlist">3</a></li>
-					  <li><a href="http://flip3.engr.oregonstate.edu:4211/Feature2_expertlist">4</a></li>
-					  <li><a href="http://flip3.engr.oregonstate.edu:4211/Feature2_expertlist">5</a></li>
-					  <li><a href="http://flip3.engr.oregonstate.edu:4211/Feature2_expertlist">...</a></li>
-					  <li><a href="http://flip3.engr.oregonstate.edu:4211/Feature2_expertlist">10</a></li>
+						    <li class="page-item disabled">
+							  <a class="page-link" href="#" tabindex="-1">Pages: </a>
+							</li>
+					{{#each data.pages}}
+						{{#if pageNum.selected}}
+							<li class="page-item active"><a class="page-link" >{{pageNum.page}}</a></li>
+						{{else}}
+							<li class="page-item"><a class="page-link" id={{pageNum.page}} onClick="getNewPage(this.id)"> {{pageNum.page}}</a></li>
+						{{/if}}
+					{{/each}}
 					</ul>
 				</div>
+				<form id="pagenationForm" method="post" action="http://flip3.engr.oregonstate.edu:4212/Feature2_expertlist" hidden>
+					<label for="newPage"></label>
+					<input type="text" name="newPage" id="newPage"/>
+				</form>
 			</div>
 
 			<div class="col-sm-2 sidenav">
@@ -104,3 +142,4 @@
 
 	<br></br>
 
+	<script src='newPage.js'></script>
