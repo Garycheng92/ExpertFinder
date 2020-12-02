@@ -56,7 +56,49 @@ class Search{
 class SearchBar extends Search{
 	constructor(requestBody){
 		super(requestBody);
+		this.searchVal=requestBody.searchVal
+		this.queryString=filterQuery.sb
 	}
+	getAddConstraintCount(){
+		var str=this.searchVal.toLowerCase()
+		str=str.replace(/,/g, '');
+		var data=str.split(' ');
+		for (var i=0; i < data.length; i++){
+			data[i].replace(/\s/g,'')
+			if (data[i]=='')
+			{
+				data.splice(i,1)
+				i--
+			}
+			else{
+				console.log('data: ' + data + ', index: ' + i + ' data[i]: ' + data[i])
+				if (data[i]=='cs'){
+					if (i+1 < data.length){
+						if(/^\d+$/.test(data[i+1])){
+							data[i]='cs ' + data[i + 1]	
+							console.log('new data[i]: ' + data[i] + ',  will splice ' + data[i+1]  )
+							data.splice(i+1, 1);
+							
+						}
+					}
+				}
+				else if (data[i].length == 5)
+				{
+					if (data[i].slice(0,2)=='cs')
+					{
+						data[i]='cs ' + data[i].slice(2,5)
+					}
+				}
+			}
+
+		}
+		console.log('data array from parsing:' + data)
+		for (var i=0; i < 6; i++){
+			this.searchParams.push(data)
+		}
+		console.log('search array for searchbar (should be 6 of the same): ' + this.searchParams)
+	}
+	
 }
 
 

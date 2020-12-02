@@ -106,7 +106,26 @@ var qbyNoFilter = `(SELECT Users.userID, Users.fName, Users.lName, UserProfile.p
 				   
 var qPopulateFilter= `SELECT courseName,'course' FROM Course UNION SELECT industryName,'industry' FROM Industry UNION SELECT skillName,'skill' From Skill`
 
-
+var qbySearchBar= `SELECT userID, fName, lName, profileTitle, profileBio, profileImage, COUNT(userID) as frequency FROM(
+    SELECT Users.userID, Users.fName, Users.lName, UserProfile.profileTitle, UserProfile.profileBio, UserProfile.profileImage FROM Users 
+				LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+				INNER JOIN User_Industry ON Users.userID=User_Industry.userID INNER JOIN Industry ON User_Industry.industryID=Industry.industryID 
+				WHERE LOWER(Industry.industryName) IN (?) 
+				UNION ALL
+				SELECT Users.userID, Users.fName, Users.lName, UserProfile.profileTitle, UserProfile.profileBio, UserProfile.profileImage  FROM Users 
+				LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+				INNER JOIN User_Skill ON Users.userID=User_Skill.userID INNER JOIN Skill ON User_Skill.skillID=Skill.skillID 
+				WHERE LOWER(Skill.skillName) IN (?)
+				UNION ALL
+				SELECT Users.userID, Users.fName, Users.lName, UserProfile.profileTitle, UserProfile.profileBio, UserProfile.profileImage FROM Users 
+				LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+				INNER JOIN User_Course ON Users.userID=User_Course.userID INNER JOIN Course ON User_Course.courseID=Course.courseID 
+				WHERE LOWER(Course.courseName) IN (?)
+				UNION ALL
+				SELECT Users.userID, Users.fName, Users.lName, UserProfile.profileTitle, UserProfile.profileBio, UserProfile.profileImage FROM Users 
+				LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+				WHERE LOWER(Users.fName) IN (?) OR LOWER(Users.lName) IN (?) OR LOWER(Users.username) IN (?)) search_results
+GROUP BY userID`
 
 module.exports.sci = qbySkillCourseIndustry;
 
@@ -124,4 +143,4 @@ module.exports.nf = qbyNoFilter
 
 module.exports.pf = qPopulateFilter
 
-
+module.exports.sb=qbySearchBar
