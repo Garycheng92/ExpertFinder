@@ -13,3 +13,9 @@ var qProfileIndustry = `(SELECT Users.userID, Industry.industryName, User_Indust
 						FROM expertfinderdb.Users
 						INNER JOIN User_Industry ON Users.UserID=User_Industry.userID
 						INNER JOIN Industry ON User_Industry.industryID=Industry.industryID);`
+
+
+// Export queries for use in route
+module.exports.qProfileSkill = qProfileSkill;
+module.exports.qProfileCourse = qProfileCourse;
+module.exports.qProfileIndustry = qProfileIndustry;
