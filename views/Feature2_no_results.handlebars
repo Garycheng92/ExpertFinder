@@ -75,7 +75,11 @@
 			<br></br>
 			<hr>
 			<div class="alert alert-danger">
-				<strong>Error!</strong> No results were found for abcdefghijk. Try again using the filters to narrow down your search.
+				<strong>Error!</strong> No results were found for 
+				{{#each data.search}} 
+					{{@key}}: {{this}} 
+				{{/each}}. 
+				 Try again using the filters to narrow down your search.
 			</div>
 		</div>
 		<div class="col-sm-2 sidenav">
