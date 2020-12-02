@@ -32,14 +32,14 @@
 			</div>
 			<div class="col-sm-8 text-left">
 				<span class="glyphicon glyphicon-user"></span>
-				<h1 style="margin-bottom:5px">John Doe</h1>
+				<h1 style="margin-bottom:5px">{{data.fName}} {{data.lName}}</h1>
 				<p style="font-size:25px;font-weight:500">Software Development Engineer -- Amazon</p>
 
 				<!-- Contact Details Popup Toggle -->
 				<div id="contact-dim"></div>
 				<div id="contact-content">
 					<div class="contact-close btn btn-primary" onclick="toggleContact()">Close</div>
-					<h2>John Doe</h2>
+					<h2>{{data.fName}} {{data.lName}}</h2>
 					<hr style="margin-top:0px;margin-bottom:0px;border:1px solid #dddddd">
 					<p><span class="contact-field">Phone</span><br>+1 (123)-456-7890 (Work)</p>
 					<p><span class="contact-field">Email</span><br><a href="mailto:john_doe@oregonstate.edu">john_doe@oregonstate.edu</a></p>
@@ -65,16 +65,16 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>Javascript</td>
-							<td>15 years</td>
+							<td>{{data.skillName}}</td>
+							<td>{{data.yearsExperience}}</td>
 						</tr>
 						<tr>
-							<td>C</td>
-							<td>8 years</td>
+							<td>{{data.skillName}}</td>
+							<td>{{data.yearsExperience}}</td>
 						</tr>
 						<tr>
-							<td>SQL</td>
-							<td>4 years</td>
+							<td>{{data.skillName}}</td>
+							<td>{{data.yearsExperience}}</td>
 						</tr>
 					</tbody>
 				</table>
