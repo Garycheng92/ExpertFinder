@@ -240,7 +240,7 @@ async function main() {
                   Twitter: ${req.body.twitter}<br>
                   LinkedIn: ${req.body.LinkedIn}</p>
                   <!--better way to link??-->
-		  <p><a href="http://flip3.engr.oregonstate.edu:4212/index.html">Click here to activate your account</a></p>`
+	          <p><a href="http://flip3.engr.oregonstate.edu:4212/index.html">Click here to activate your account</a></p>`
   });
 
   console.log("Email sent successfully!");
