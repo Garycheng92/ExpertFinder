@@ -63,7 +63,7 @@ app.get('/Feature2', function(req, res)
 	});
 });
 
-//render main search for expert page
+//render error page if no results are found
 app.get('/Feature2_no_results', function(req, res)
 {
 	q=filterQuery.pf
@@ -76,6 +76,7 @@ app.get('/Feature2_no_results', function(req, res)
 		else
 		{
 			data=reformatData.reformatSQL1(results)
+			data.search=req.query;
 			res.render('Feature2_no_results',{data});
 		}
 	});
@@ -91,6 +92,21 @@ app.post('/Feature2_expertlist', function(req,res){
 		if (err) {res.render('404');}
 		else{
 			data = JSON.parse(results);
+			// if not given a page number, make q_pg equal to the last selected page in file
+			if (q_pg === undefined){
+				for (var i=0; i < data.pages.length; i++){
+					var npg=data.pages[i];
+					if (npg.pageNum.selected){q_pg=npg.pageNum.page}
+				}	
+			}
+			else{
+				//change which page is currently selected with request new page
+				for (var i=0; i < data.pages.length; i++){
+					var npg=data.pages[i];
+					if (npg.pageNum.page == q_pg){npg.pageNum.selected=true}
+					else if (npg.pageNum.selected && npg.pageNum.page != q_pg){delete npg.pageNum.selected}
+				}
+			}
 			var expertPage=[];
 			//modify which experts are displayed
 			for (var i=0; i < data.experts.length; i++){
@@ -98,12 +114,7 @@ app.post('/Feature2_expertlist', function(req,res){
 				if (Exp.newExp.page==q_pg){expertPage.push(Exp)}
 			}
 			data.experts=expertPage;
-			//change which page is currently selected
-			for (var i=0; i < data.pages.length; i++){
-				var npg=data.pages[i];
-				if (npg.pageNum.page == q_pg){npg.pageNum.selected=true}
-				else if (npg.pageNum.selected && npg.pageNum.page != q_pg){delete npg.pageNum.selected}
-			}
+
 			res.render('Feature2_expertlist', {data})
 		}
 	})
