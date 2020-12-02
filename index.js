@@ -21,6 +21,7 @@ app.set('port',4212);
 
 const fs=require('fs')
 const filterQuery=require('./AppModules/sqlF2Filter')
+const F3Query=require('./AppModules/sqlF3Filter')
 const reformatData=require('./AppModules/reformat')
 const filterLogic=require('./AppModules/getFilterQuery')
 const search_expert=require('./AppModules/Search')
@@ -195,13 +196,14 @@ app.get('/Feature2_expertlist', function(req, res){
 
 //render for Feature3 (expert profile)
 app.get('/Feature3', function(req, res){
-	var sql ='SELECT * FROM user'
-	mysql.pool.query(sql, function(error, results){
+	var context = {};
+	var query = F3Query;
+	mysql.pool.query(query, function(error, results){
 		if(error){
 			res.render('404');
 		}
-		data=reformatData.reformatSQL1(results);
-		res.render('Feature3', {data});
+		context.data = results;
+		res.render('Feature3', context);
 	})
 });
 
