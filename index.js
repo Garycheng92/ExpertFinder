@@ -198,6 +198,19 @@ app.get('/Feature2_expertlist', function(req, res){
 	})
 })
 
+//render for Feature3 (expert profile)
+app.get('/Feature3', function(req, res){
+	q=filterQuery.pf
+	mysql.pool.query(q, function(error, results){
+		if(error){
+			res.render('404');
+		}
+		data=reformatData.reformatSQL1(results);
+		res.render('Feature3', {data});
+	})
+});
+
+
 app.post('/Feature5_Registration_Page.html', (req, res) => {
   "use strict";
 
