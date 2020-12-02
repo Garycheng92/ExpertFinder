@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <meta name="viewport content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+  <!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h-->
+  <style>
+
+.center {
+    margin: auto;
+    width: 60%;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.other {
+    margin: auto;
+    width: 60%;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.org {
+    margin: auto;
+    width: 60%;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.hideform {
+    display: none;
+}
+
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;}
+    }
+
+    .glyphicon.glyphicon-user {
+      font-size: 150px;
+      padding-top: 20px;
+    }
+
+    #contact-content {
+      position: fixed;
+      padding-left: 10px;
+      padding-right: 10px;
+      left: 40%;
+      height: 400px;
+      width: 20%;
+      text-align: left;
+      box-sizing: border-box;
+      transform: scale(0);
+      background: #ffffff;
+      z-index: 2;
+    }
+
+    #contact-content.active {
+      transition: all 200ms ease-in-out;
+      transform: scale(1);
+    }
+
+    #contact-dim {
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      height: 100vh;
+      width: 100vw;
+      background: #000000;
+      opacity: 0.8;
+      z-index: 1;
+      display: none;
+    }
+
+    #contact-dim.active {
+      display: block;
+    }
+
+    .contact-field {
+      font-size: 19px;
+      font-weight: 500;
+    }
+
+    .contact-close {
+      position: absolute;
+      bottom: 20px;
+      left: 37.5%;
+      width: 25%;
+    }
+  </style>
+
+  <script type="text/javascript">
+    function toggleContact(){
+      document.getElementById("contact-content").classList.toggle("active");
+      document.getElementById("contact-dim").classList.toggle("active");
+    }
+  </script>
+
+  <head><title>Expert Finder - Edit Profile</title></head>
+
+  <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">ExpertFinder</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li ><a href="index.html">Home</a></li>
+          <li><a href="Feature2.html">Find Expert</a></li>
+          <li class="active"><a href="Feature3.html">My Profile</a></li>
+          <li><a href="Feature5_Registration_Page.html">Register</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help </a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid text-center">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <p><a href="https://github.com/" target="_blank">GitHub</a></p>
+        <p><a href="https://www.linkedin.com/" target="_blank">LinkedIn</a></p>
+        <p><a href="https://twitter.com/home" target="_blank">Twitter</a></p>
+      </div>
+      <div class="col-sm-8 text-left">
+        <span class="glyphicon glyphicon-user"></span>
+		<h1 style="margin-bottom:5px">John Doe</h1>
+    <p style="font-size:25px;font-weight:500">Software Development Engineer -- Amazon</p>
+
+    <!-- Contact Details Popup Toggle -->
+    <div id="contact-dim"></div>
+    <div id="contact-content">
+      <div class="contact-close btn btn-primary" onclick="toggleContact()">Close</div>
+      <h2>John Doe</h2>
+      <hr style="margin-top:0px;margin-bottom:0px;border:1px solid #dddddd">
+      <p><span class="contact-field">Phone</span><br>+1 (123)-456-7890 (Work)</p>
+      <p><span class="contact-field">Email</span><br><a href="mailto:john_doe@oregonstate.edu">john_doe@oregonstate.edu</a></p>
+      <p><span class="contact-field">GitHub</span><br><a href="https://github.com/" target="_blank">github.com/johndoe123</a></p>
+      <p><span class="contact-field">LinkedIn</span><br><a href="https://www.linkedin.com/" target="_blank">linkedin.com/in/johndoe1</a></p>
+      <p><span class="contact-field">Twitter</span><br><a href="https://twitter.com/home" target="_blank">JDoe</a></p>
+    </div>
+
+    <button class="btn btn-primary" onclick="toggleContact()">View Contact Details</button>
+    <!-- Contact Details Popup Toggle -->
+
+		<h3>Overview</h3>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+    <a href='Feature1_Edit_Profile.html'><button type="button" class="btn btn-default">Edit Overview</button></a>
+
+        <hr>
+        <h3>Skills</h3>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>Skills</th>
+              <th>Experience</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Javascript</td>
+              <td>15 years</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>8 years</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+            <tr>
+              <td>SQL</td>
+              <td>4 years</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="center hideform">
+    <button id="close" style="float: right;">X</button>
+    <form action="/action_page.php">
+        Skill:<br>
+        <input type="text" name="skill" value="Python">
+        <br>
+        Years Experience:<br>
+        <input type="text" name="Years Experience" value="2 Years">
+        <br><br>
+        <input type="submit" value="Add Skill">
+    </form>
+</div>
+<button id="show" class="btn btn-primary ">Add Skill</button>
+
+        <h3>Past Coursework</h3>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>Coursework</th>
+              <th>Year</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CS 290 - Web Development</td>
+              <td>Fall 2019</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+            <tr>
+              <td>CS 340 - Introduction To Database</td>
+              <td>Winter 2020</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+            <tr>
+              <td>CS 361 - Software Engineering I</td>
+              <td>Fall 2020</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="other hideform">
+    <button id="closeCourse" style="float: right;">X</button>
+    <form action="/action_page.php">
+        Coursework:<br>
+        <input type="text" name="course" value="CS 290 - Web Development">
+        <br>
+        Year Taken:<br>
+        <input type="text" name="yearTaken" value="Winter 2019">
+        <br><br>
+        <input type="submit" value="Add Course">
+    </form>
+</div>
+<button id="showCourse" class="btn btn-primary">Add Course</button>
+
+<h3>Industry</h3>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>Organization</th>
+              <th>Duration</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Oregon State</td>
+              <td>4 years</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+            <tr>
+              <td>Google</td>
+              <td>2 years</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+            <tr>
+              <td>Amazon</td>
+              <td>5 years</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+          </tbody>
+        </table>
+<div class="org hideform">
+    <button id="closeOrg" style="float: right;">X</button>
+    <form action="/action_page.php">
+        Organization:<br>
+        <input type="text" name="org" value="Vanguard Solutions">
+        <br>
+        Duration:<br>
+        <input type="text" name="duration" value="2 years">
+        <br><br>
+        <input type="submit" value="Add Organization">
+    </form>
+</div>
+<button id="showOrg" class="btn btn-primary">Add Organization</button>
+
+<br></br>
+      </div>
+
+
+      <div class="col-sm-2 sidenav">
+        <div class="well">
+
+        </div>
+        <div class="well">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="container-fluid text-center">
+    <p>ExpertFinder is used for Oregon State students to connect with current students and/or alumni for networking opportunities in the computer science field</p>
+  </footer>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $('#show').on('click', function () {
+    $('.center').show();
+    $(this).hide();
+})
+
+$('#close').on('click', function () {
+    $('.center').hide();
+    $('#show').show();
+})
+
+ $('#showCourse').on('click', function () {
+    $('.other').show();
+    $(this).hide();
+})
+
+$('#closeCourse').on('click', function () {
+    $('.other').hide();
+    $('#showCourse').show();
+})
+
+$('#showOrg').on('click', function () {
+    $('.org').show();
+    $(this).hide();
+})
+
+$('#closeOrg').on('click', function () {
+    $('.org').hide();
+    $('#showOrg').show();
+})
+
+</script>
+
+  </body>
+</html>
+

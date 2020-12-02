@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<meta name="viewport content="width=device-width, initial-scale=1.0">
+	<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+	<!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h-->
+	<style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+      bottom: 0;
+      position: absolute;
+      width: 100%
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;}
+    }
+  </style>
+
+
+
+	<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">ExpertFinder</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+					<li class="active"><a href="Feature2.html">Find Expert</a></li>
+					<li><a href="Feature3.html">My Profile</a></li>
+					<li><a href="Feature5_Registration_Page.html">Register</a></li>
+
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help </a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid text-center">
+		<div class="row content">
+			<div class="col-sm-2 sidenav">
+
+			</div>
+			<div class="col-sm-8 text-left">
+				<h1>Find an Expert</h1>
+				<h3> Search for Expert</h3>
+				<p>Search for expert by first name, last name, course, industry, or skill set.</p>
+				<form action="Feature2_no_results.html">
+					<div class="form-group">
+						<input type="text" class="form-control" id="searchVal">
+
+					</div>
+					<button type="submit" class="btn btn-primary" action="Feature2_no_results.html" method="get" >Find Expert</button>
+
+				</form>
+				<hr>
+
+				<h3>Filter for Expert</h3>
+				<p>Filter for expert by skillset, OSU courses, and/or industry. Select 'All' to not filter by the criteria.</p>
+				<form action="Feature2_expertlist.html">
+					<div class="form-group">
+						<label for="course">Select Courses</label>
+						<select name="course">
+							<option>All</option>
+							<option>CS 161</option>
+							<option>CS 162</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="skillset">Select Skill</label>
+						<select name="skillset">
+							<option>All</option>
+							<option>Javascript</option>
+							<option>C</option>
+							<option>SQL</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="industry">Select Industry</label>
+						<select name="industry">
+							<option>All</option>
+							<option>Oregon State</option>
+							<option>Amazon</option>
+							<option>Google</option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary" action="Feature2_expertlist.html" method="get">Find Expert</button>
+				</form>
+				<br></br>
+				<hr>
+				<div class="alert alert-danger">
+					<strong>Error!</strong> No results were found for abcdefghijk. Try again using the filters to narrow down your search.
+				</div>
+			</div>
+
+			<div class="col-sm-2 sidenav">
+
+			</div>
+		</div>
+	</div>
+	<hr>
+
+	<footer class="container-fluid text-center">
+		<p>ExpertFinder is used for Oregon State students to connect with current students and/or alumni for networking opportunities in the computer science field</p>
+	</footer>
+
+	</body>
+</html>
+

@@ -9,7 +9,6 @@ var mysql = require('./AppModules/dbcon.js');
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'AppModules')));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -27,25 +26,21 @@ const filterLogic=require('./AppModules/getFilterQuery')
 const search_expert=require('./AppModules/Search')
 const expert=require('./AppModules/Expert')
 
-//for testing purpose only...should link to handlebar
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-//for testing purpose only...should  link to handlebar
 app.get('/index.html', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-//for testing purpose only...should link to handlebar
 app.get('/Feature3.html', (req, res) => {
   res.sendFile(path.join(__dirname + '/Feature3.html'));
 });
 
-//for testing purpose only... should link to handlebar
-app.get('/Feature5.html', (req, res) => {
-  res.sendFile(path.join(__dirname + '/Feature5.html'));
-  console.log("This is the form that shows")
+app.get('/Feature5_Registration_Page.html', (req, res) => {
+  res.sendFile(path.join(__dirname + '/Feature5_Registration_Page.html'));
+  console.log("This is the form that shows");
 });
 
 app.get('/user/:user_id', async (req, res) => {
@@ -203,7 +198,7 @@ app.get('/Feature2_expertlist', function(req, res){
 	})
 })
 
-app.post('/Feature5.html', (req, res) => {
+app.post('/Feature5_Registration_Page.html', (req, res) => {
   "use strict";
 
 // async..await is not allowed in global scope, must use a wrapper
@@ -245,7 +240,7 @@ async function main() {
                   Twitter: ${req.body.twitter}<br>
                   LinkedIn: ${req.body.LinkedIn}</p>
                   <!--better way to link??-->
-		  <p><a href="http://flip3.engr.oregonstate.edu:4212/Feature3.html">Click here to activate your account</a></p>`
+		  <p><a href="http://flip3.engr.oregonstate.edu:4212/index.html">Click here to activate your account</a></p>`
   });
 
   console.log("Email sent successfully!");
