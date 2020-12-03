@@ -1,31 +1,101 @@
 
+	<style>
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Landing page background image */
+    body {
+      background-image: url('https://images.unsplash.com/photo-1489844097929-c8d5b91c456e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80');
+    }
+
+    /* Landing page text */
+    .description {
+  left: 50%;
+  position: absolute;
+  top: 45%;
+  transform: translate(-50%, -55%);
+  text-align: center;
+
+}
+
+#Uname{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+}  
+#Pass{  
+ 
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+	float
+.login{  
+
+        overflow: hidden;  
+        margin: auto;  
+        margin: 20 0 0 450px;  
+        padding: 80px;  
+        background: #23463f;  
+        border-radius: 15px ;  
+          
+}  
+.centered{
+	position=fixed;
+	top:50%;
+	left:50%;
+}
+
+  </style>
 
 
-<div class="container-fluid text-center">
-	<div class="row content">
 
+  <div class="description">
     <h1>Expert Finder</h1>
 	<h4>LOGIN</h4>
+			
 	<p>Please login with your username and password</p>
-    <form method='post' action='http://localhost:4212/login'>
-		<div class="form-group">
-		<label for='username'> username: </label>
-		<input type='text' id='username' name ='username'/>
-		<br></br>
-		<label for='pass'>password</label>
-		<input type='password' id='pass' name='pass'/>
-		<input type='submit' value='login' class="btn btn-primary"/>
+    <form method='post' action='/login' class='centered'>
+		<div class='centered'>
+			<div id='Uname' >
+				<label for='username'> username: </label><input type='text' id='username' name ='username'/>
+			</div>
+			<div id='Pass'>
+				<label for='pass'>password: </label><input type='password' id='pass' name='pass'/>
+			</div>
+			<br>
+			<input type='submit' value='login' class="btn btn-primary"/>
+			<br>
+			<br>
+			<br>
+			<button  value='Register' class="btn btn-default" onclick="window.location.href='Feature5.html'" > Register New User</button>
 		</div>
+		
 	</form>
-	<br></br>
-	<br></br>
-	<br></br>
-	<p>New User? Please click the button below to register for an account</p>
-	<a href='Feature5.html'><button type="button" class="btn btn-primary">Register</button></a>
 
-</div>
-</div>
- 
+
+
+	</div>
+	<br></br>
+	<br></br>
+	<br></br>
+
+
+
+
+
+
+ </div>
 
 
 <footer class="container-fluid text-center">
