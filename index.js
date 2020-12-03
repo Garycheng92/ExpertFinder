@@ -35,8 +35,22 @@ app.get('/index', (req, res) => {
   res.render('index');
 });
 
+app.get('/Feature5_Registration_Page.html', (req, res) => {
+  res.sendFile(path.join(__dirname + '/Feature5_Registration_Page.html'));
+  console.log("This is the form that shows");
+});
+
+app.get('/Feature1.html', (req, res) => {
+  res.redirect('Feature1')
+});
+
+app.get('/Feature2.html', (req, res) => {
+  res.redirect('Feature2')
+});
+
+
 app.get('/Feature3.html', (req, res) => {
-  res.sendFile(path.join(__dirname + '/Feature3.html'));
+  res.redirect('Feature3')
 });
 
 app.get('/Feature5_Registration_Page.html', (req, res) => {
