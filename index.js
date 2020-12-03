@@ -28,11 +28,15 @@ const search_expert=require('./AppModules/Search')
 const expert=require('./AppModules/Expert')
 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index',{});
 });
 
 app.get('/index', (req, res) => {
   res.render('index');
+});
+
+app.get('/home',(req,res)=>{
+	res.render('home');
 });
 
 app.get('/Feature5_Registration_Page.html', (req, res) => {
@@ -40,18 +44,7 @@ app.get('/Feature5_Registration_Page.html', (req, res) => {
   console.log("This is the form that shows");
 });
 
-app.get('/Feature1.html', (req, res) => {
-  res.redirect('Feature1')
-});
 
-app.get('/Feature2.html', (req, res) => {
-  res.redirect('Feature2')
-});
-
-
-app.get('/Feature3.html', (req, res) => {
-  res.redirect('Feature3')
-});
 
 app.get('/Feature5_Registration_Page.html', (req, res) => {
   res.sendFile(path.join(__dirname + '/Feature5_Registration_Page.html'));
@@ -378,19 +371,56 @@ app.get('/Feature2_expertlist', function(req, res){
 	})
 })
 
-//render for Feature3 (expert profile)
+//LOADS DATA TO FEATURE ONE AND POPULATES PAGE
 app.get('/Feature3', function(req, res){
-	var context = {};
-	var sql = F3Query.qCombined;
-	mysql.pool.query(sql, function(error, results){
-		if(error){
-			res.render('404');
-		}
-		context.data = results;
-		res.render('Feature3', context);
-	})
+	console.log('req.query: ' + JSON.stringify(req.query))
+q=`SELECT 'UserInfo',Users.userID, Users.fName, Users.lName
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+WHERE Users.userID=?
+UNION ALL
+SELECT 'UserContact',Users.email, '', ''
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+WHERE Users.userID=?
+UNION ALL
+SELECT 'UserURL',Users.githubURL, Users.facebookURL, Users.twitterURL
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+WHERE Users.userID=?
+UNION ALL
+SELECT 'UserProfile', UserProfile.profileImage, UserProfile.profileBio, UserProfile.profileTitle
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+WHERE Users.userID=?
+UNION ALL
+SELECT 'Courses',Course.courseName, CourseTerms.courseSeason, CourseTerms.courseYear FROM Users
+LEFT JOIN User_Course ON Users.userID=User_Course.userID
+LEFT JOIN Course ON User_Course.courseID=Course.courseID
+LEFT JOIN CourseTerms ON User_Course.CourseTermID=CourseTerms.CourseTermID
+WHERE Users.userID=?
+UNION ALL
+SELECT 'Skills',Skill.skillName,User_Skill.yearsExperience,'' FROM Users
+LEFT JOIN User_Skill ON Users.userID=User_Skill.userID
+LEFT JOIN Skill ON User_Skill.skillID=Skill.skillID
+WHERE Users.userID=?
+UNION ALL 
+SELECT 'Industry',Industry.industryName,   User_Industry.yearsExperience,'' FROM Users
+LEFT JOIN User_Industry ON Users.userID=User_Industry.userID
+LEFT JOIN Industry ON User_Industry.industryID=Industry.industryID
+WHERE Users.userID=?`
+		var data={};
+		var userID=req.query.user_id;
+		let searchParams=new Array(7).fill(userID);
+		mysql.pool.query(q,searchParams,function (error, results2)
+		{
+			if(error)
+			{
+				res.render('404');
+			}
+			else
+			{
+				data=reformatData.reformatSQLFT1(results2)
+				res.render('Feature3',{data});
+			}
+		});
 });
-
 
 app.post('/Feature5_Registration_Page.html', (req, res) => {
   "use strict";
