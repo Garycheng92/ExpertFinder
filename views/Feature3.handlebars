@@ -1,4 +1,4 @@
-		  <!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h-->
+  <!-- https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h-->
   <style>
 
 .center {
@@ -77,126 +77,210 @@
       width: 25%;
     }
   </style>
+
+  <script type="text/javascript">
+    function toggleContact(){
+      document.getElementById("contact-content").classList.toggle("active");
+      document.getElementById("contact-dim").classList.toggle("active");
+    }
+  </script>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">ExpertFinder</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li ><a href="/home">Home</a></li>
+          <li><a href="/Feature2">Find Expert</a></li>
+          <li class='active'><a href="/Feature1">My Profile</a></li>
+          <li><a href="Feature5.html">Register</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help </a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid text-center">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+
+      </div>
+      <div class="col-sm-8 text-left">
+        <span class="glyphicon glyphicon-user"></span>
+		<h1 style="margin-bottom:5px">{{data.fName}} {{data.lName}}</h1>
+    <p style="font-size:25px;font-weight:500">{{data.profileTitle}}</p>
 	
-	<div class="container-fluid text-center">
-		<div class="row content">
-			<div class="col-sm-2 sidenav">
-				<p class='hint'><a href="https://github.com/" target="_blank">GitHub</a></p>
-				<div class='hint-container'>
-				<h3>Projects</h3>
-				<table class="table">
-					<thead class="thead-light">
-						<tr>
-							<th>Name</th>
-							<th>Date Created</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Web Scraper</td>
-							<td>12/21/15</td>
-						</tr>
-						<tr>
-							<td>Twitter Bot</td>
-							<td>01/11/16</td>
-						</tr>
-						<tr>
-							<td>Pizza Finder</td>
-							<td>05/01/19</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-				<p><a href="https://www.linkedin.com/" target="_blank">LinkedIn</a></p>
-				<p><a href="https://twitter.com/home" target="_blank">Twitter</a></p>
-			</div>
-			<div class="col-sm-8 text-left">
-				<span class="glyphicon glyphicon-user"></span>
-				<h1 style="margin-bottom:5px">{{data.fName}} {{data.lName}}</h1>
-				<p style="font-size:25px;font-weight:500">Software Development Engineer -- Amazon</p>
+	<!-- Stored User ID -->
+	<input type='hidden' id='storedUserID' name='storedUserID' value='{{data.userID}}'/>
+	
+    <!-- Contact Details Popup Toggle -->
+    <div id="contact-dim"></div>
+    <div id="contact-content">
+      <div class="contact-close btn btn-primary" onclick="toggleContact()">Close</div>
+      <h2>{{data.fName}} {{data.lName}}</h2>
+	  <form action='/Feature1_edit_contact' method='post'>
+      <hr style="margin-top:0px;margin-bottom:0px;border:1px solid #dddddd">
+		  <label for='userID' hidden></label>
+		  <input type='hidden' name='userID' value={{data.userID}} hidden>
+		  <br>
+		  <label for 'email'><span class="contact-field">Email</span></label><br>
+		  <input type='email' id='email' name='email' value={{data.email}}>
+		  <br>
+		  <label for 'githubURL'><span class="contact-field">GitHub</span></label><br>
+		  <input type='url' id='githubURL' name='githubURL' value={{data.githubURL}}/>
+		  <br>
+		  <label for 'facebookURL'><span class="contact-field">Facebook</span></label><br>
+		  <input type='url' id='facebookURL' name='facebookURL' value={{data.facebookURL}}/>
+		  <br>
+		  <label for 'twitterURL'><span class="contact-field">Twitter</span></label><br>
+		  <input type='url' id='twitterURL' name='twitterURL' value={{data.twitterURL}}/>
+		  <br>
+		  <input type='submit' value='Update Data' class="btn btn-default"/>
+		  <br>
+	  </form>
+    </div>
 
-				<!-- Contact Details Popup Toggle -->
-				<div id="contact-dim"></div>
-				<div id="contact-content">
-					
-					<h2>{{data.fName}} {{data.lName}}</h2>
-					<hr style="margin-top:0px;margin-bottom:0px;border:1px solid #dddddd">
-					<p><span class="contact-field">Phone</span><br>+1 (123)-456-7890 (Work)</p>
-					<p><span class="contact-field">Email</span><br><a href="mailto:john_doe@oregonstate.edu">john_doe@oregonstate.edu</a></p>
-					<p><span class="contact-field">GitHub</span><br><a href="https://github.com/" target="_blank">github.com/johndoe123</a></p>
-					<p><span class="contact-field">LinkedIn</span><br><a href="https://www.linkedin.com/" target="_blank">linkedin.com/in/johndoe1</a></p>
-					<p><span class="contact-field">Twitter</span><br><a href="https://twitter.com/home" target="_blank">JDoe</a></p>
-				</div>
+    <button class="btn btn-default" onclick="toggleContact()">View Contact Details</button>
+    <!-- Contact Details Popup Toggle -->
 
-				<button class="btn btn-primary" onclick="toggleContact()">View Contact Details</button>
-				<!-- Contact Details Popup Toggle -->
+		<h3>Overview</h3>
+		<p>{{data.profileBio}}</p>
+ 
+        <hr>
+        <h3>Skills</h3>
+        <table class="table" id ='skillTable'>
+          <thead class="thead-light">
+            <tr>
+              <th>Skills</th>
+              <th>Experience (Years)</th>
+ 
+            </tr>
+          </thead>
+          <tbody>
+		  {{#each data.Skills}}
+            <tr>
+              <td id='skill' >{{name}}</td>
+              <td>{{experience}}</td>
+            </tr>
+		  {{/each}}
+          </tbody>
+        </table>
+     
 
-				<h3>Overview</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				<hr>
-			
-				<h3>Skills</h3>
-				<table class="table">
-					<thead class="thead-light">
-						<tr>
-							<th>Skills</th>
-							<th>Experience</th>
-						</tr>
-					</thead>
-					<tbody>
-						{{#each data}}
-						<tr>
-							<td>{{data.skillName}}</td>
-							<td>{{data.yearsExperience}}</td>
-						</tr>
-						{{/each}}
-					</tbody>
-				</table>
-				<h3>Past Coursework</h3>
-				<table class="table">
-					<thead class="thead-light">
-						<tr>
-							<th>Coursework</th>
-							<th>Year</th>
-						</tr>
-					</thead>
-					<tbody>
-						{{#each data}}
-						<tr>
-							<td>{{data.courseName}}</td>
-							<td>{{data.courseYear}}</td>
-							<td>{{data.courseSeason}}</td>
-						</tr>
-						{{/each}}
-					</tbody>
-				</table>
-				<h3>Industry</h3>
-				<table class="table">
-					<thead class="thead-light">
-						<tr>
-							<th>Organization</th>
-							<th>Duration</th>
-						</tr>
-					</thead>
-					<tbody>
-						{{#each data}}
-						<tr>
-							<td>{{data.industryName}}</td>
-							<td>{{data.yearsExperience}}</td>
-						</tr>
-						{{/each}}
-					</tbody>
-				</table>
-				<a href='/Feature2'><button type="button" class="btn btn-primary">Search For Experts</button></a>
-				<hr>
-			</div>
-			<div class="col-sm-2 sidenav">
-				<div class="well">
-					<p>ADS</p>
-				</div>
-				<div class="well">
-					<p>ADS</p>
-				</div>
-			</div>
-		</div>
-	</div>
+
+        <h3>Past Coursework</h3>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>Coursework</th>
+              <th>Year</th>
+
+            </tr>
+          </thead>
+          <tbody>
+		  {{#each data.Courses}}
+            <tr>
+              <td>{{name}}</td>
+              <td>{{season}} {{year}}</td>
+
+            </tr>
+
+			{{/each}}
+          </tbody>
+        </table>
+
+
+
+<h3>Industry</h3>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>Organization</th>
+              <th>Duration</th>
+
+            </tr>
+          </thead>
+          <tbody>
+		  {{#each data.Industry}}
+            <tr>
+              <td>{{name}}</td>
+              <td>{{experience}}</td>
+            </tr>
+			{{/each}}
+
+          </tbody>
+        </table>
+		<form method='post' action='/Feature2_expertlist'>	
+			<input type='submit' value='Return to Results'/>
+		</form>
+
+<br></br>
+      </div>
+
+
+      <div class="col-sm-2 sidenav">
+        <div class="well">
+
+        </div>
+        <div class="well">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $('#show').on('click', function () {
+    $('.center').show();
+    $(this).hide();
+})
+
+$('#close').on('click', function () {
+    $('.center').hide();
+    $('#show').show();
+})
+
+ $('#showCourse').on('click', function () {
+    $('.other').show();
+    $(this).hide();
+})
+
+$('#closeCourse').on('click', function () {
+    $('.other').hide();
+    $('#showCourse').show();
+})
+
+$('#showOrg').on('click', function () {
+    $('.org').show();
+    $(this).hide();
+})
+
+$('#closeOrg').on('click', function () {
+    $('.org').hide();
+    $('#showOrg').show();
+})
+
+</script>
+
+  <script type="text/javascript">
+    function toggleContact(){
+      document.getElementById("contact-content").classList.toggle("active");
+      document.getElementById("contact-dim").classList.toggle("active");
+    }
+  </script>
+
+
