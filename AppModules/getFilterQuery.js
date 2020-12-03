@@ -3,10 +3,18 @@ const search=require('./Search')
 
 function getFilterQuery(reqBody)
 {
+	
+	// search Bar	
+	if (reqBody.searchVal)
+	{
+		let search_bar={}
+		search_bar = new search.SearchBar(reqBody)
+		search_bar.getAddConstraintCount()
+		return search_bar
+	}
 	filter_c=true
 	filter_i=true
 	filter_s=true
-
 	// filter by course?
 	if (reqBody.course)
 	{
@@ -59,6 +67,7 @@ function getFilterQuery(reqBody)
 	{
 		filter_i=false
 	}
+	
 	let filter={}
 	if (filter_i && filter_s && filter_c){
 		filter= new search.FilterSCI(reqBody)
