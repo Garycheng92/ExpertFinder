@@ -64,18 +64,12 @@
 						</tr>
 					</thead>
 					<tbody>
+						{{#each data}}
 						<tr>
 							<td>{{data.skillName}}</td>
 							<td>{{data.yearsExperience}}</td>
 						</tr>
-						<tr>
-							<td>{{data.skillName}}</td>
-							<td>{{data.yearsExperience}}</td>
-						</tr>
-						<tr>
-							<td>{{data.skillName}}</td>
-							<td>{{data.yearsExperience}}</td>
-						</tr>
+						{{/each}}
 					</tbody>
 				</table>
 				<h3>Past Coursework</h3>
@@ -87,18 +81,13 @@
 						</tr>
 					</thead>
 					<tbody>
+						{{#each data}}
 						<tr>
-							<td>CS 290 - Web Development</td>
-							<td>Fall 2019</td>
+							<td>{{data.courseName}}</td>
+							<td>{{data.courseYear}}</td>
+							<td>{{data.courseSeason}}</td>
 						</tr>
-						<tr>
-							<td>CS 340 - Introduction To Database</td>
-							<td>Winter 2020</td>
-						</tr>
-						<tr>
-							<td>CS 361 - Software Engineering I</td>
-							<td>Fall 2020</td>
-						</tr>
+						{{/each}}
 					</tbody>
 				</table>
 				<h3>Industry</h3>
@@ -110,18 +99,12 @@
 						</tr>
 					</thead>
 					<tbody>
+						{{#each data}}
 						<tr>
-							<td>Oregon State</td>
-							<td>4 years</td>
+							<td>{{data.industryName}}</td>
+							<td>{{data.yearsExperience}}</td>
 						</tr>
-						<tr>
-							<td>Google</td>
-							<td>2 years</td>
-						</tr>
-						<tr>
-							<td>Amazon</td>
-							<td>5 years</td>
-						</tr>
+						{{/each}}
 					</tbody>
 				</table>
 				<a href='Feature2_expertlist.html'><button type="button" class="btn btn-primary">Back to Results</button></a>

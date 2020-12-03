@@ -115,7 +115,6 @@ app.post('/Feature2_expertlist', function(req,res){
 				if (Exp.newExp.page==q_pg){expertPage.push(Exp)}
 			}
 			data.experts=expertPage;
-
 			res.render('Feature2_expertlist', {data})
 		}
 	})
@@ -197,8 +196,8 @@ app.get('/Feature2_expertlist', function(req, res){
 //render for Feature3 (expert profile)
 app.get('/Feature3', function(req, res){
 	var context = {};
-	var query = F3Query;
-	mysql.pool.query(query, function(error, results){
+	var sql = F3Query.qCombined;
+	mysql.pool.query(sql, function(error, results){
 		if(error){
 			res.render('404');
 		}
