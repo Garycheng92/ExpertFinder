@@ -1,0 +1,250 @@
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">ExpertFinder</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li ><a href="index.html">Home</a></li>
+          <li><a href="http://localhost:/Feature2">Find Expert</a></li>
+          <li class="active"><a href="Feature3.html">My Profile</a></li>
+          <li><a href="Feature5.html">Register</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Help </a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid text-center">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+
+      </div>
+      <div class="col-sm-8 text-left">
+        <span class="glyphicon glyphicon-user"></span>
+		<h1 style="margin-bottom:5px">{{data.fName}} {{data.lName}}</h1>
+    <p style="font-size:25px;font-weight:500">{{data.profileTitle}}</p>
+	
+	<!-- Stored User ID -->
+	<input type='hidden' id='storedUserID' name='storedUserID' value='{{data.userID}}'/>
+	
+    <!-- Contact Details Popup Toggle -->
+    <div id="contact-dim"></div>
+    <div id="contact-content">
+      <div class="contact-close btn btn-primary" onclick="toggleContact()">Close</div>
+      <h2>{{data.fName}} {{data.lName}}</h2>
+	  <form action='/Feature1_edit_contact' method='post'>
+      <hr style="margin-top:0px;margin-bottom:0px;border:1px solid #dddddd">
+		  <label for='userID' hidden></label>
+		  <input type='hidden' name='userID' value={{data.userID}} hidden>
+		  <br>
+		  <label for 'email'><span class="contact-field">Email</span></label><br>
+		  <input type='email' id='email' name='email' value={{data.email}}>
+		  <br>
+		  <label for 'githubURL'><span class="contact-field">GitHub</span></label><br>
+		  <input type='url' id='githubURL' name='githubURL' value={{data.githubURL}}/>
+		  <br>
+		  <label for 'facebookURL'><span class="contact-field">Facebook</span></label><br>
+		  <input type='url' id='facebookURL' name='facebookURL' value={{data.facebookURL}}/>
+		  <br>
+		  <label for 'twitterURL'><span class="contact-field">Twitter</span></label><br>
+		  <input type='url' id='twitterURL' name='twitterURL' value={{data.twitterURL}}/>
+		  <br>
+		  <input type='submit' value='Update Data' class="btn btn-default"/>
+		  <br>
+	  </form>
+    </div>
+
+    <button class="btn btn-default" onclick="toggleContact()">Edit Contact Details</button>
+    <!-- Contact Details Popup Toggle -->
+
+		<h3>Overview</h3>
+		<p>{{data.profileBio}}</p>
+    <a href='Feature1_Edit_Profile.html'><button type="button" class="btn btn-default">Edit Overview</button></a>
+
+        <hr>
+        <h3>Skills</h3>
+        <table class="table" id ='skillTable'>
+          <thead class="thead-light">
+            <tr>
+              <th>Skills</th>
+              <th>Experience (Years)</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+		  {{#each data.Skills}}
+            <tr>
+              <td id='skill' >{{name}}</td>
+              <td>{{experience}}</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger" id='{{name}}{{data.userID}}' onClick="deleteSkill(this.id)" >Delete</Button></td>
+            </tr>
+		  {{/each}}
+          </tbody>
+        </table>
+     
+	 
+	 
+	 
+	 <div class="center hideform">
+    <button id="close" style="float: right;">X</button>
+    <form action="/Feature1_add_skill" method='post'>
+		<input type='hidden' name='userID' value={{data.userID}}>
+		Skill:<br>
+        <input type="text" name="skill">
+        <br>
+        Years Experience:<br>
+        <input type="number" name="experience">
+        <br><br>
+        <input type="submit" value="Add Skill">
+    </form>
+</div>
+<button id="show" class="btn btn-primary ">Add Skill</button>
+
+        <h3>Past Coursework</h3>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>Coursework</th>
+              <th>Year</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+		  {{#each data.Courses}}
+            <tr>
+              <td>{{name}}</td>
+              <td>{{season}} {{year}}</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+
+			{{/each}}
+          </tbody>
+        </table>
+
+        <div class="other hideform">
+    <button id="closeCourse" style="float: right;">X</button>
+    <form action="/action_page.php">
+        Coursework:<br>
+        <input type="text" name="course" value="CS 290 - Web Development">
+        <br>
+        Year Taken:<br>
+        <input type="text" name="yearTaken" value="Winter 2019">
+        <br><br>
+        <input type="submit" value="Add Course">
+    </form>
+</div>
+<button id="showCourse" class="btn btn-primary">Add Course</button>
+
+<h3>Industry</h3>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>Organization</th>
+              <th>Duration</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+		  {{#each data.Industry}}
+            <tr>
+              <td>{{name}}</td>
+              <td>{{experience}}</td>
+			  <td><Button class="btn btn-default">Edit </Button></td>
+			  <td><Button class="btn btn-danger">Delete</Button></td>
+            </tr>
+			{{/each}}
+
+          </tbody>
+        </table>
+<div class="org hideform">
+    <button id="closeOrg" style="float: right;">X</button>
+    <form action="/action_page.php">
+        Organization:<br>
+        <input type="text" name="org" value="Vanguard Solutions">
+        <br>
+        Duration:<br>
+        <input type="text" name="duration" value="2 years">
+        <br><br>
+        <input type="submit" value="Add Organization">
+    </form>
+</div>
+<button id="showOrg" class="btn btn-primary">Add Organization</button>
+
+<br></br>
+      </div>
+
+
+      <div class="col-sm-2 sidenav">
+        <div class="well">
+
+        </div>
+        <div class="well">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="container-fluid text-center">
+    <p>ExpertFinder is used for Oregon State students to connect with current students and/or alumni for networking opportunities in the computer science field</p>
+  </footer>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $('#show').on('click', function () {
+    $('.center').show();
+    $(this).hide();
+})
+
+$('#close').on('click', function () {
+    $('.center').hide();
+    $('#show').show();
+})
+
+ $('#showCourse').on('click', function () {
+    $('.other').show();
+    $(this).hide();
+})
+
+$('#closeCourse').on('click', function () {
+    $('.other').hide();
+    $('#showCourse').show();
+})
+
+$('#showOrg').on('click', function () {
+    $('.org').show();
+    $(this).hide();
+})
+
+$('#closeOrg').on('click', function () {
+    $('.org').hide();
+    $('#showOrg').show();
+})
+
+</script>
+
+  <script type="text/javascript">
+    function toggleContact(){
+      document.getElementById("contact-content").classList.toggle("active");
+      document.getElementById("contact-dim").classList.toggle("active");
+    }
+  </script>
+  <script src='delete.js'></script>
