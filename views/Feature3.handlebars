@@ -132,21 +132,13 @@
       <hr style="margin-top:0px;margin-bottom:0px;border:1px solid #dddddd">
 		  <label for='userID' hidden></label>
 		  <input type='hidden' name='userID' value={{data.userID}} hidden>
+	
+		 <p><span class="contact-field">Email</span><br><a href={{data.email}}>{{data.email}}</a></p>
+		<p><span class="contact-field">GitHub</span><br><a href={{data.githubURL}} target="_blank">{{data.githubURL}}</a></p>
+		<p><span class="contact-field">Facebok</span><br><a href={{data.facebookURL}} target="_blank">{{data.facebookURL}}</a></p>
+		<p><span class="contact-field">Twitter</span><br><a href={{data.twitterURL}}" target="_blank">{{data.twitterURL}}</a></p>
 		  <br>
-		  <label for 'email'><span class="contact-field">Email</span></label><br>
-		  <input type='email' id='email' name='email' value={{data.email}}>
-		  <br>
-		  <label for 'githubURL'><span class="contact-field">GitHub</span></label><br>
-		  <input type='url' id='githubURL' name='githubURL' value={{data.githubURL}}/>
-		  <br>
-		  <label for 'facebookURL'><span class="contact-field">Facebook</span></label><br>
-		  <input type='url' id='facebookURL' name='facebookURL' value={{data.facebookURL}}/>
-		  <br>
-		  <label for 'twitterURL'><span class="contact-field">Twitter</span></label><br>
-		  <input type='url' id='twitterURL' name='twitterURL' value={{data.twitterURL}}/>
-		  <br>
-		  <input type='submit' value='Update Data' class="btn btn-default"/>
-		  <br>
+
 	  </form>
     </div>
 
