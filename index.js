@@ -28,11 +28,11 @@ const search_expert=require('./AppModules/Search')
 const expert=require('./AppModules/Expert')
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.render('index');
 });
 
-app.get('/index.html', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+app.get('/index', (req, res) => {
+  res.render('index');
 });
 
 app.get('/Feature3.html', (req, res) => {
@@ -42,6 +42,177 @@ app.get('/Feature3.html', (req, res) => {
 app.get('/Feature5_Registration_Page.html', (req, res) => {
   res.sendFile(path.join(__dirname + '/Feature5_Registration_Page.html'));
   console.log("This is the form that shows");
+});
+
+//DELETE skill from POST REQUEST
+app.post('/Feature1_delete_skill', (req, res) => {
+	q='DELETE FROM User_Skill WHERE userID=? And skillID=(SELECT skillID FROM Skill WHERE skillName=?)'
+	console.log('in post delete ' + JSON.stringify(req.body))
+
+	var deleteParams=[req.body.userID, req.body.skillName]
+	mysql.pool.query(q,deleteParams,function (error){
+		if(error){
+			console.log(error)
+			res.render('404')}
+		else
+		{
+			console.log('delete succssful')
+			res.redirect('Feature1');
+		}
+	});
+});
+
+
+//POST REQUEST TO ADD TO DATABASE - COMES FROM THE FORM WITH ACTION 'Feature1_add_skill'
+//Adds Skill to skill table if doesn't exists then assigns skill ID to user
+app.post('/Feature1_add_skill', (req, res) => {
+	q1='INSERT INTO Skill (skillName) SELECT ? WHERE NOT EXISTS(SELECT skillID FROM Skill WHERE skillName=?)'
+	q2='INSERT INTO User_Skill (userID, skillID, yearsExperience) VALUES(?,(SELECT skillID FROM Skill WHERE skillName=?),?)';
+
+	//req.body.skill comes from the form in the Feature1.handlebars where the name=skill. req.body.skill appears twice in insert params so the data replaces the two question marks
+	var insertParams1=[req.body.skill,req.body.skill]
+	var insertParams2=[req.body.userID,req.body.skill,req.body.experience]
+	//nested sql statements for two queries
+	//query one. add skill to Skill table if doesn't exists
+	mysql.pool.query(q1,insertParams1,function (error){
+		if(error){
+			console.log(error)
+			res.render('404')}
+		else
+		{
+			//query two. assign skill to user in User_Skill table- async so two queries need to be nested
+			mysql.pool.query(q2,insertParams2,function (error){
+				if(error){
+					console.log(error)
+					res.render('404')}
+				else
+				{
+					//redirect to Feature1 get request to reload  the data
+					res.redirect('Feature1');
+					//Note- for your feature you will be using redirect and not render
+				}
+			});
+		}
+	});
+});
+
+
+//POST REQUEST TO UPDATE THE USER CONTACT INFO
+app.post('/Feature1_edit_contact', (req, res) => {
+	q='UPDATE Users SET email=?,githubURL=?, facebookURL=?, twitterURL=? WHERE userID=?'
+	console.log('rquest body: ' + JSON.stringify(req.body))
+	var updateParams=[req.body.email,req.body.githubURL,req.body.facebookURL,req.body.twitterURL, req.body.userID]
+	//nested sql statements for two queries
+	mysql.pool.query(q,updateParams,function (error){
+		if(error){
+			console.log(error)
+			res.render('404')}
+		else
+		{
+			console.log('data updated')
+			res.redirect('Feature1');
+		}
+	});
+});
+
+
+//LOADS DATA TO FEATURE ONE AND POPULATES PAGE
+app.get('/Feature1', function(req, res){
+q=`SELECT 'UserInfo',Users.userID, Users.fName, Users.lName
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+WHERE Users.userID=?
+UNION ALL
+SELECT 'UserContact',Users.email, '', ''
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+WHERE Users.userID=?
+UNION ALL
+SELECT 'UserURL',Users.githubURL, Users.facebookURL, Users.twitterURL
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+WHERE Users.userID=?
+UNION ALL
+SELECT 'UserProfile', UserProfile.profileImage, UserProfile.profileBio, UserProfile.profileTitle
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+WHERE Users.userID=?
+UNION ALL
+SELECT 'Courses',Course.courseName, CourseTerms.courseSeason, CourseTerms.courseYear FROM Users
+LEFT JOIN User_Course ON Users.userID=User_Course.userID
+LEFT JOIN Course ON User_Course.courseID=Course.courseID
+LEFT JOIN CourseTerms ON User_Course.CourseTermID=CourseTerms.CourseTermID
+WHERE Users.userID=?
+UNION ALL
+SELECT 'Skills',Skill.skillName,User_Skill.yearsExperience,'' FROM Users
+LEFT JOIN User_Skill ON Users.userID=User_Skill.userID
+LEFT JOIN Skill ON User_Skill.skillID=Skill.skillID
+WHERE Users.userID=?
+UNION ALL 
+SELECT 'Industry',Industry.industryName,   User_Industry.yearsExperience,'' FROM Users
+LEFT JOIN User_Industry ON Users.userID=User_Industry.userID
+LEFT JOIN Industry ON User_Industry.industryID=Industry.industryID
+WHERE Users.userID=?`
+	fs.readFile('./user.json', 'utf8', function (err, results) {
+	if (err){res.render('404')}
+	else{
+		var readData=JSON.parse(results)
+		console.log('reading from file: ' + readData)
+		console.log('param data: ' + readData[0].userID)
+		var data={};
+		var userID=readData[0].userID
+		let searchParams=new Array(7).fill(userID);
+
+		console.log(searchParams)
+		mysql.pool.query(q,searchParams,function (error, results2)
+		{
+			if(error)
+			{
+				res.render('404');
+			}
+			else
+			{
+				data=reformatData.reformatSQLFT1(results2)
+				res.render('Feature1',{data});
+			}
+		});
+	}
+  })
+});
+
+
+//open login page
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+//req - inputs from the form in login.handlebars
+//res - the result of the query
+// '/login' the link that the information was sent to from the form in login ie(http://localhost:4212/login)
+app.post('/login', (req, res) => {
+	//sql query statement
+	q='SELECT userID,fName,lName FROM Users WHERE username=? AND password=?'
+	//search params of query. these fill in the data for the question marks
+	searchParams=[req.body.username,req.body.pass]
+  mysql.pool.query(q,searchParams,function (error, results)
+	{
+		//if connection error
+		if(error){
+			res.render('404');
+		}
+		// if result returns an empty query and nothing was found, render login_error handlebars page
+		else if(!results.length){
+			res.render('login_error');
+		}
+		else{
+			//WRITING USER DATA to store user data while they are nagivating between pages - will store userID, name and lastname
+			fs.writeFile('./user.json', JSON.stringify(results), err =>{
+				if (err){res.render('404')}
+				else{
+					//handlebars template (in views) to send the data
+					console.log('writing to file: '+ results)
+					res.render('home');
+				}
+			})
+			
+		}
+	});
 });
 
 
