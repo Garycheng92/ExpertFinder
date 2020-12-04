@@ -69,6 +69,24 @@ app.post('/Feature1_delete_skill', (req, res) => {
 	});
 });
 
+//DELETE course from POST REQUEST
+app.post('/Feature1_delete_course', (req, res) => {
+	q='DELETE FROM User_Course WHERE userID=? And userID=(SELECT userID FROM Course WHERE courseName=?)'
+	console.log('in post delete ' + JSON.stringify(req.body))
+
+	var deleteParams=[req.body.userID, req.body.courseName]
+	mysql.pool.query(q,deleteParams,function (error){
+		if(error){
+			console.log(error)
+			res.render('404')}
+		else
+		{
+			console.log('delete succssful')
+			res.redirect('Feature1');
+		}
+	});
+});
+
 
 //POST REQUEST TO ADD TO DATABASE - COMES FROM THE FORM WITH ACTION 'Feature1_add_skill'
 //Adds Skill to skill table if doesn't exists then assigns skill ID to user
