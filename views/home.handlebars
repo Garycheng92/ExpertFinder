@@ -49,7 +49,7 @@
 					<li class="active"><a href="/home">Home</a></li>
 					<li><a href="/Feature2">Find Expert</a></li>
 					<li><a href="/Feature1">My Profile</a></li>
-					<li><a href="Feature5.html">Register</a></li>
+					<li><a href="Feature5_Registration_Page.html">Register</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings </a></li>
@@ -60,10 +60,15 @@
   </nav>
 
   <div class="description">
+	{{#each data}}
+	<h2>Welcome {{fName}} {{lName}} !</h2>
+	{{/each}}
+
     <h1>Expert Finder</h1>
-    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)..</p>
-    <a href='/Feature2'><button type="button" class="btn btn-secondary btn-lg">Find Expert</button></a>
-    <a href='Feature5.html'><button type="button" class="btn btn-primary btn-lg">Register</button></a>
+    <p><strong>Welcome to Expert Finder!</strong> Find an expert from Oregon State that can help you out! Whether it's challenging course work or networking opportunites, 
+	Expert Finder is the place to get you a step ahead.</p>
+	<a href='/Feature2'><button type="button" class="btn btn-secondary btn-lg">Find Expert</button></a>
+    <a href='Feature5_Registration_Page.html'><button type="button" class="btn btn-primary btn-lg">Register</button></a>
   </div>
 
 

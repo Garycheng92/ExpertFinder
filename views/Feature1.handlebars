@@ -99,7 +99,7 @@
           <li ><a href="/home">Home</a></li>
           <li><a href="/Feature2">Find Expert</a></li>
           <li class='active'><a href="/Feature1">My Profile</a></li>
-          <li><a href="Feature5.html">Register</a></li>
+          <li class="active"><a href="Feature5_Registration_Page.html">Register</a></li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -131,19 +131,19 @@
 	  <form action='/Feature1_edit_contact' method='post'>
       <hr style="margin-top:0px;margin-bottom:0px;border:1px solid #dddddd">
 		  <label for='userID' hidden></label>
-		  <input type='hidden' name='userID' value={{data.userID}} hidden>
+		  <input type='hidden' name='userID' value={{data.userID}} ></input>
 		  <br>
 		  <label for 'email'><span class="contact-field">Email</span></label><br>
-		  <input type='email' id='email' name='email' value={{data.email}}>
+		  <input type='email' id='email' name='email' value='{{data.email}}'/>
 		  <br>
 		  <label for 'githubURL'><span class="contact-field">GitHub</span></label><br>
-		  <input type='url' id='githubURL' name='githubURL' value={{data.githubURL}}/>
+		  <input type='url' id='githubURL' name='githubURL' value='{{data.githubURL}}'/>
 		  <br>
 		  <label for 'facebookURL'><span class="contact-field">Facebook</span></label><br>
-		  <input type='url' id='facebookURL' name='facebookURL' value={{data.facebookURL}}/>
+		  <input type='url' id='facebookURL' name='facebookURL' value='{{data.facebookURL}}'/>
 		  <br>
 		  <label for 'twitterURL'><span class="contact-field">Twitter</span></label><br>
-		  <input type='url' id='twitterURL' name='twitterURL' value={{data.twitterURL}}/>
+		  <input type='url' id='twitterURL' name='twitterURL' value='{{data.twitterURL}}' />
 		  <br>
 		  <input type='submit' value='Update Data' class="btn btn-default"/>
 		  <br>
@@ -230,7 +230,7 @@
         <br>
         Term Taken:<br>
         <input type="text" name="season" value="Season">
-        <input type="number" name="year" value="Year">
+        <input type="text" name="year" value="Year">
         <br><br>
         <input type="submit" value="Add Course">
     </form>
