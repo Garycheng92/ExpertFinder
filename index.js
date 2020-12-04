@@ -571,7 +571,7 @@ async function main() {
                   Twitter: ${req.body.twitter}<br>
                   LinkedIn: ${req.body.LinkedIn}</p>
                   <!--make sure to change hyperlink-->
-	          <p><a href="/login">Click here to login to your account</a></p>`
+	          <p><a href="http://localhost:4212/login">Click here to login to your account</a></p>`
   });
 
   console.log("Email sent successfully!");
@@ -626,7 +626,7 @@ async function main() {
                   Twitter: ${req.body.twitter}<br>
                   LinkedIn: ${req.body.LinkedIn}</p>
                   <!--make sure to change hyperlink-->
-	          <p><a href="/login">Click here to login to your account</a></p>`
+	          <p><a href="http://localhost:4212/login">Click here to login to your account</a></p>`
   });
 
   console.log("Email sent successfully!");
