@@ -188,7 +188,7 @@
     <form action="/Feature1_add_skill" method='post'>
 		<input type='hidden' name='userID' value={{data.userID}}>
 		Skill:<br>
-        <input type="text" name="skill">
+        <input type="text" name="skill" value="Skill Name">
         <br>
         Years Experience:<br>
         <input type="number" name="experience">
@@ -202,34 +202,35 @@
         <table class="table" id='courseTable'>
           <thead class="thead-light">
             <tr>
-              <th>Coursework</th>
-              <th>Year</th>
+              <th>Course</th>
+              <th>Term Taken</th>
               <th></th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-		  {{#each data.Courses}}
+      {{#each data.Courses}}
             <tr>
               <td id='course'>{{name}}</td>
               <td>{{season}} {{year}}</td>
-			  <td><Button class="btn btn-default">Edit </Button></td>
-			  <td><Button class="btn btn-danger" id='{{name}}{{data.userID}}' onClick="deleteCourse(this.id)">Delete</Button></td>
+        <td><Button class="btn btn-default">Edit </Button></td>
+        <td><Button class="btn btn-danger" id='{{name}}{{data.userID}}' onClick="deleteCourse(this.id)">Delete</Button></td>
             </tr>
-			{{/each}}
+      {{/each}}
           </tbody>
         </table>
-		
+    
 
         <div class="other hideform">
     <button id="closeCourse" style="float: right;">X</button>
     <form action="/Feature1_add_course" method='post'>
-		<input type='hidden' name='userID' value={{data.userID}}>
-        Coursework:<br>
-        <input type="text" name="course">
+    <input type='hidden' name='userID' value={{data.userID}}>
+        Course Name:<br>
+        <input type="text" name="course" value="Course">
         <br>
-        Year Taken:<br>
-        <input type="text" name="yearTaken">
+        Term Taken:<br>
+        <input type="text" name="season" value="Season">
+        <input type="number" name="year" value="Year">
         <br><br>
         <input type="submit" value="Add Course">
     </form>
