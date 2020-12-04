@@ -50,11 +50,6 @@ app.get('/Feature5_Registration_Page_NewUser.html', (req, res) => {
   console.log("This is the form that shows");
 });
 
-app.get('/Feature5_Registration_Page.html', (req, res) => {
-  res.sendFile(path.join(__dirname + '/Feature5_Registration_Page.html'));
-  console.log("This is the form that shows");
-});
-
 //DELETE skill from POST REQUEST
 app.post('/Feature1_delete_skill', (req, res) => {
 	q='DELETE FROM User_Skill WHERE userID=? And skillID=(SELECT skillID FROM Skill WHERE skillName=?)'
