@@ -107,9 +107,9 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="Feature2.html">Find Expert</a></li>
-					<li><a href="Feature3.html">My Profile</a></li>
+					<li><a href="/home">Home</a></li>
+					<li><a href="/Feature2">Find Expert</a></li>
+					<li><a href="/Feature1">My Profile</a></li>
 					<li class="active"><a href="Feature5_Registration_Page.html">Register</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -215,7 +215,7 @@ On submission, shows alert then closes current window and redirects to home page
         //find diff way?
         //https://stackoverflow.com/questions/2032640/issue-with-window-close-and-chrome
         setTimeout(window.top.close, 500);
-        window.open('index.html');
+        window.open('/home');
       }
       return false;
   }
