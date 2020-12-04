@@ -563,6 +563,7 @@ async function main() {
     html: `<h1> Welcome to expertFinder!<h1>
     	   <p>You are receiving this email because it was used to sign up for expertFinder.</p>
 	       <p>Signed Up As: ${req.body.signup}<br>
+  		  Username: ${req.body.username}<br>
 	          First Name: ${req.body.firstname}<br>
      		  Last Name: ${req.body.lastname}<br>
        		  Gender: ${req.body.gender}<br>
@@ -575,7 +576,7 @@ async function main() {
                   Twitter: ${req.body.twitter}<br>
                   LinkedIn: ${req.body.LinkedIn}</p>
                   <!--better way to link??-->
-	          <p><a href="/index">Click here to activate your account</a></p>`
+	          <p><a href="http://flip3.engr.oregonstate.edu:4212/login">Click here to login to your account</a></p>`
   });
 
   console.log("Email sent successfully!");
@@ -617,6 +618,7 @@ async function main() {
     html: `<h1> Welcome to expertFinder!<h1>
     	   <p>You are receiving this email because it was used to sign up for expertFinder.</p>
 	       <p>Signed Up As: ${req.body.signup}<br>
+                  Username: ${req.body.username}<br>
 	          First Name: ${req.body.firstname}<br>
      		  Last Name: ${req.body.lastname}<br>
        		  Gender: ${req.body.gender}<br>
@@ -629,7 +631,7 @@ async function main() {
                   Twitter: ${req.body.twitter}<br>
                   LinkedIn: ${req.body.LinkedIn}</p>
                   <!--better way to link??-->
-	          <p><a href="/index">Click here to activate your account</a></p>`
+	          <p><a href="http://flip3.engr.oregonstate.edu:4212/login">Click here to login to your account</a></p>`
   });
 
   console.log("Email sent successfully!");

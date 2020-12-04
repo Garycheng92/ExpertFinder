@@ -141,7 +141,16 @@
       </form>
     </div>
 
-    &nbsp;
+    <div>
+      <label> Username </label>
+      <input id="username" type="text" name="username" placeholder= "Username" size="15" required />
+    </div>
+
+    <div>
+      <label> Password </label>
+      <input id="password" type="password" name="password" placeholder= "Password" size="15" required />
+    </div>
+
 
     <div>
       <label> First Name </label>
@@ -215,7 +224,7 @@ On submission, shows alert then closes current window and redirects to home page
         //find diff way?
         //https://stackoverflow.com/questions/2032640/issue-with-window-close-and-chrome
         setTimeout(window.top.close, 500);
-        window.open('/home');
+        window.open('/index');
       }
       return false;
   }
