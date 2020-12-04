@@ -45,6 +45,10 @@ app.get('/Feature5_Registration_Page.html', (req, res) => {
 });
 
 
+app.get('/Feature5_Registration_Page_NewUser.html', (req, res) => {
+  res.sendFile(path.join(__dirname + '/Feature5_Registration_Page_NewUser.html'));
+  console.log("This is the form that shows");
+});
 
 app.get('/Feature5_Registration_Page.html', (req, res) => {
   res.sendFile(path.join(__dirname + '/Feature5_Registration_Page.html'));
@@ -319,7 +323,9 @@ app.post('/login', (req, res) => {
 				else{
 					//handlebars template (in views) to send the data
 					console.log('writing to file: '+ results)
-					res.render('home');
+					data=results;
+					console.log(data);
+					res.render('home',{data});
 				}
 			})
 			
@@ -569,7 +575,7 @@ async function main() {
                   Twitter: ${req.body.twitter}<br>
                   LinkedIn: ${req.body.LinkedIn}</p>
                   <!--better way to link??-->
-	          <p><a href="http://flip3.engr.oregonstate.edu:4212/index.html">Click here to activate your account</a></p>`
+	          <p><a href="/index">Click here to activate your account</a></p>`
   });
 
   console.log("Email sent successfully!");
@@ -579,6 +585,61 @@ async function main() {
 main().catch(console.error);
 
 });
+
+
+app.post('/Feature5_Registration_Page_NewUser.html', (req, res) => {
+  "use strict";
+
+// async..await is not allowed in global scope, must use a wrapper
+async function main() {
+
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    service: 'gmail', // true for 465, false for other ports
+    auth: {
+      user: 'expertFinder123123@gmail.com', // generated ethereal user
+      pass: '123456789!@#' // generated ethereal password
+    }
+  });
+
+  //*******login to gmail account.
+  //       go to account
+  //       turn ON Less secure app access
+  //       after this when you try to send mail from your app you will get error .
+  //       than go to Security issues found ( it's first option in security tab of google account )
+  //****** here you need to verify that last activities is verified and its you .
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: 'expertFinder123123@gmail.com', // sender address
+    to: `${req.body.email}`, // email based on user input
+    subject: "Verify your expertFinder registration", // Subject line
+    html: `<h1> Welcome to expertFinder!<h1>
+    	   <p>You are receiving this email because it was used to sign up for expertFinder.</p>
+	       <p>Signed Up As: ${req.body.signup}<br>
+	          First Name: ${req.body.firstname}<br>
+     		  Last Name: ${req.body.lastname}<br>
+       		  Gender: ${req.body.gender}<br>
+       		  Phone: ${req.body.phone}<br>
+	          Email: ${req.body.email}<br>
+       		  Tech Skillset: ${req.body.techskillset}<br>
+       		  Past Courses: ${req.body.pastcourses}<br>
+       		  Industry/Organization: ${req.body.industry}<br>
+	          Github: ${req.body.github}<br>
+                  Twitter: ${req.body.twitter}<br>
+                  LinkedIn: ${req.body.LinkedIn}</p>
+                  <!--better way to link??-->
+	          <p><a href="/index">Click here to activate your account</a></p>`
+  });
+
+  console.log("Email sent successfully!");
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+}
+
+main().catch(console.error);
+
+});
+
 
 app.use(function(req,res){
   res.type('text/plain');
