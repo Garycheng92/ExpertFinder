@@ -198,8 +198,8 @@
 </div>
 <button id="show" class="btn btn-primary ">Add Skill</button>
 
-        <h3>Past Coursework</h3>
-        <table class="table">
+<h3>Past Coursework</h3>
+        <table class="table" id='courseTable'>
           <thead class="thead-light">
             <tr>
               <th>Coursework</th>
@@ -211,24 +211,25 @@
           <tbody>
 		  {{#each data.Courses}}
             <tr>
-              <td>{{name}}</td>
+              <td id='course'>{{name}}</td>
               <td>{{season}} {{year}}</td>
 			  <td><Button class="btn btn-default">Edit </Button></td>
-			  <td><Button class="btn btn-danger">Delete</Button></td>
+			  <td><Button class="btn btn-danger" id='{{name}}{{data.userID}}' onClick="deleteCourse(this.id)">Delete</Button></td>
             </tr>
-
 			{{/each}}
           </tbody>
         </table>
+		
 
         <div class="other hideform">
     <button id="closeCourse" style="float: right;">X</button>
-    <form action="/action_page.php">
+    <form action="/Feature1_add_course" method='post'>
+		<input type='hidden' name='userID' value={{data.userID}}>
         Coursework:<br>
-        <input type="text" name="course" value="CS 290 - Web Development">
+        <input type="text" name="course">
         <br>
         Year Taken:<br>
-        <input type="text" name="yearTaken" value="Winter 2019">
+        <input type="text" name="yearTaken">
         <br><br>
         <input type="submit" value="Add Course">
     </form>
