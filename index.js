@@ -122,6 +122,40 @@ app.post('/Feature1_add_skill', (req, res) => {
 });
 
 
+//POST REQUEST TO ADD TO DATABASE - COMES FROM THE FORM WITH ACTION 'Feature1_add_course'
+//Adds Course to course table if doesn't exists then assigns course ID to user
+app.post('/Feature1_add_course', (req, res) => {
+	q1='INSERT INTO Course (courseName) SELECT ? WHERE NOT EXISTS(SELECT courseID FROM Course WHERE courseName=?)'
+	q2='INSERT INTO User_Course (userID, courseID, courseSeason, courseYear) VALUES(?,(SELECT courseID FROM Course WHERE courseName=?),?)';
+
+	//req.body.course comes from the form in the Feature1.handlebars where the name=course. 
+	//req.body.course appears twice in insert params so the data replaces the two question marks
+	var insertParams1=[req.body.course,req.body.course]
+	var insertParams2=[req.body.userID,req.body.course,req.body.season,req.body.year]
+	//nested sql statements for two queries
+	//query one. add course to Course table if doesn't exists
+	mysql.pool.query(q1,insertParams1,function (error){
+		if(error){
+			console.log(error)
+			res.render('404')}
+		else
+		{
+			//query two. assign course to user in User_Course table- async so two queries need to be nested
+			mysql.pool.query(q2,insertParams2,function (error){
+				if(error){
+					console.log(error)
+					res.render('404')}
+				else
+				{
+					//redirect to Feature1 get request to reload  the data
+					res.redirect('Feature1');
+					//Note- for your feature you will be using redirect and not render
+				}
+			});
+		}
+	});
+});
+
 //POST REQUEST TO UPDATE THE USER CONTACT INFO
 app.post('/Feature1_edit_contact', (req, res) => {
 	q='UPDATE Users SET email=?,githubURL=?, facebookURL=?, twitterURL=? WHERE userID=?'
