@@ -238,7 +238,7 @@
 <button id="showCourse" class="btn btn-primary">Add Course</button>
 
 <h3>Industry</h3>
-        <table class="table">
+        <table class="table" id="industryTable">
           <thead class="thead-light">
             <tr>
               <th>Organization</th>
@@ -250,23 +250,24 @@
           <tbody>
 		  {{#each data.Industry}}
             <tr>
-              <td>{{name}}</td>
+              <td id='organization'>{{name}}</td>
               <td>{{experience}}</td>
 			  <td><Button class="btn btn-default">Edit </Button></td>
-			  <td><Button class="btn btn-danger">Delete</Button></td>
+			  <td><Button class="btn btn-danger" id='{{name}}{{data.userID}}' onClick="deleteOrg(this.id)">Delete</Button></td>
             </tr>
 			{{/each}}
-
           </tbody>
         </table>
+		
 <div class="org hideform">
     <button id="closeOrg" style="float: right;">X</button>
-    <form action="/action_page.php">
+    <form action="/Feature1_add_org" method='post'>
+		<input type='hidden' name='userID' value={{data.userID}}>
         Organization:<br>
-        <input type="text" name="org" value="Vanguard Solutions">
+        <input type="text" name="organization">
         <br>
-        Duration:<br>
-        <input type="text" name="duration" value="2 years">
+        Duration (Years):<br>
+        <input type="number" name="duration" >
         <br><br>
         <input type="submit" value="Add Organization">
     </form>
