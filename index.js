@@ -145,7 +145,7 @@ app.post('/Feature1_add_course', (req, res) => {
 	q1='INSERT INTO Course (courseName) SELECT ? WHERE NOT EXISTS(SELECT courseID FROM Course WHERE courseName=?)'
 	q2='INSERT INTO User_Course (userID, courseID, courseSeason, courseYear) VALUES(?,(SELECT courseID FROM Course WHERE courseName=?),?)';
 
-	//req.body.course comes from the form in the Feature1.handlebars where the name=course. 
+	//req.body.course comes from the form in the Feature1.handlebars where the name=course.
 	//req.body.course appears twice in insert params so the data replaces the two question marks
 	var insertParams1=[req.body.course,req.body.course]
 	var insertParams2=[req.body.userID,req.body.course,req.body.season,req.body.year]
@@ -180,7 +180,7 @@ app.post('/Feature1_add_org', (req, res) => {
 	q1='INSERT INTO Industry (industryName) SELECT ? WHERE NOT EXISTS(SELECT industryID FROM Industry WHERE industryName=?)'
 	q2='INSERT INTO User_Industry (userID, industryID, yearsExperience) VALUES(?,(SELECT industryID FROM Industry WHERE industryName=?),?)';
 
-	//req.body.organization comes from the form in the Feature1.handlebars where the name=organization. 
+	//req.body.organization comes from the form in the Feature1.handlebars where the name=organization.
 	//req.body.organization appears twice in insert params so the data replaces the two question marks
 	var insertParams1=[req.body.organization,req.body.organization]
 	var insertParams2=[req.body.userID,req.body.organization,req.body.duration]
@@ -230,19 +230,19 @@ app.post('/Feature1_edit_contact', (req, res) => {
 //LOADS DATA TO FEATURE ONE AND POPULATES PAGE
 app.get('/Feature1', function(req, res){
 q=`SELECT 'UserInfo',Users.userID, Users.fName, Users.lName
-FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID
 WHERE Users.userID=?
 UNION ALL
 SELECT 'UserContact',Users.email, '', ''
-FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID
 WHERE Users.userID=?
 UNION ALL
 SELECT 'UserURL',Users.githubURL, Users.facebookURL, Users.twitterURL
-FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID
 WHERE Users.userID=?
 UNION ALL
 SELECT 'UserProfile', UserProfile.profileImage, UserProfile.profileBio, UserProfile.profileTitle
-FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID
 WHERE Users.userID=?
 UNION ALL
 SELECT 'Courses',Course.courseName, CourseTerms.courseSeason, CourseTerms.courseYear FROM Users
@@ -255,7 +255,7 @@ SELECT 'Skills',Skill.skillName,User_Skill.yearsExperience,'' FROM Users
 LEFT JOIN User_Skill ON Users.userID=User_Skill.userID
 LEFT JOIN Skill ON User_Skill.skillID=Skill.skillID
 WHERE Users.userID=?
-UNION ALL 
+UNION ALL
 SELECT 'Industry',Industry.industryName,   User_Industry.yearsExperience,'' FROM Users
 LEFT JOIN User_Industry ON Users.userID=User_Industry.userID
 LEFT JOIN Industry ON User_Industry.industryID=Industry.industryID
@@ -323,7 +323,7 @@ app.post('/login', (req, res) => {
 					res.render('home',{data});
 				}
 			})
-			
+
 		}
 	});
 });
@@ -382,7 +382,7 @@ app.post('/Feature2_expertlist', function(req,res){
 				for (var i=0; i < data.pages.length; i++){
 					var npg=data.pages[i];
 					if (npg.pageNum.selected){q_pg=npg.pageNum.page}
-				}	
+				}
 			}
 			else{
 				//change which page is currently selected with request new page
@@ -481,19 +481,19 @@ app.get('/Feature2_expertlist', function(req, res){
 app.get('/Feature3', function(req, res){
 	console.log('req.query: ' + JSON.stringify(req.query))
 q=`SELECT 'UserInfo',Users.userID, Users.fName, Users.lName
-FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID
 WHERE Users.userID=?
 UNION ALL
 SELECT 'UserContact',Users.email, '', ''
-FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID
 WHERE Users.userID=?
 UNION ALL
 SELECT 'UserURL',Users.githubURL, Users.facebookURL, Users.twitterURL
-FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID
 WHERE Users.userID=?
 UNION ALL
 SELECT 'UserProfile', UserProfile.profileImage, UserProfile.profileBio, UserProfile.profileTitle
-FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID 
+FROM Users LEFT JOIN UserProfile ON Users.userID=UserProfile.userID
 WHERE Users.userID=?
 UNION ALL
 SELECT 'Courses',Course.courseName, CourseTerms.courseSeason, CourseTerms.courseYear FROM Users
@@ -506,7 +506,7 @@ SELECT 'Skills',Skill.skillName,User_Skill.yearsExperience,'' FROM Users
 LEFT JOIN User_Skill ON Users.userID=User_Skill.userID
 LEFT JOIN Skill ON User_Skill.skillID=Skill.skillID
 WHERE Users.userID=?
-UNION ALL 
+UNION ALL
 SELECT 'Industry',Industry.industryName,   User_Industry.yearsExperience,'' FROM Users
 LEFT JOIN User_Industry ON Users.userID=User_Industry.userID
 LEFT JOIN Industry ON User_Industry.industryID=Industry.industryID
@@ -653,7 +653,7 @@ app.use(function(err, req, res, next){
 
 app.listen(app.get('port'), function(){
   console.log(
-    `Express started on http://${process.env.HOSTNAME}:${app.get(
+    `Express started on http://localhost:${app.get(
       'port'
     )}; press Ctrl-C to terminate.`
   );
