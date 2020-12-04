@@ -570,8 +570,8 @@ async function main() {
 	          Github: ${req.body.github}<br>
                   Twitter: ${req.body.twitter}<br>
                   LinkedIn: ${req.body.LinkedIn}</p>
-                  <!--better way to link??-->
-	          <p><a href="http://flip3.engr.oregonstate.edu:4212/login">Click here to login to your account</a></p>`
+                  <!--make sure to change hyperlink-->
+	          <p><a href="/login">Click here to login to your account</a></p>`
   });
 
   console.log("Email sent successfully!");
@@ -625,8 +625,8 @@ async function main() {
 	          Github: ${req.body.github}<br>
                   Twitter: ${req.body.twitter}<br>
                   LinkedIn: ${req.body.LinkedIn}</p>
-                  <!--better way to link??-->
-	          <p><a href="http://flip3.engr.oregonstate.edu:4212/login">Click here to login to your account</a></p>`
+                  <!--make sure to change hyperlink-->
+	          <p><a href="/login">Click here to login to your account</a></p>`
   });
 
   console.log("Email sent successfully!");
