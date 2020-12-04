@@ -406,6 +406,8 @@ app.post('/Feature2_expertlist', function(req,res){
 
 
 //render activities schedule page, prepopulate dropdowns.
+
+//render activities schedule page, prepopulate dropdowns.
 app.get('/Feature2_expertlist', function(req, res){
 	q=filterQuery.pf
 	q_object=filterLogic.getFilterQuery(req.query)
