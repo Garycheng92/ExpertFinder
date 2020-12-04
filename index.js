@@ -174,6 +174,41 @@ app.post('/Feature1_add_course', (req, res) => {
 	});
 });
 
+
+//POST REQUEST TO ADD TO DATABASE - COMES FROM THE FORM WITH ACTION 'Feature1_add_org'
+//Adds Organization to industry table if doesn't exists then assigns industry ID to user
+app.post('/Feature1_add_org', (req, res) => {
+	q1='INSERT INTO Industry (industryName) SELECT ? WHERE NOT EXISTS(SELECT industryID FROM Industry WHERE industryName=?)'
+	q2='INSERT INTO User_Industry (userID, industryID, yearsExperience) VALUES(?,(SELECT industryID FROM Industry WHERE industryName=?),?)';
+
+	//req.body.organization comes from the form in the Feature1.handlebars where the name=organization. 
+	//req.body.organization appears twice in insert params so the data replaces the two question marks
+	var insertParams1=[req.body.organization,req.body.organization]
+	var insertParams2=[req.body.userID,req.body.organization,req.body.duration]
+	//nested sql statements for two queries
+	//query one. add organization to Industry table if doesn't exists
+	mysql.pool.query(q1,insertParams1,function (error){
+		if(error){
+			console.log(error)
+			res.render('404')}
+		else
+		{
+			//query two. assign organization to user in User_Industry table- async so two queries need to be nested
+			mysql.pool.query(q2,insertParams2,function (error){
+				if(error){
+					console.log(error)
+					res.render('404')}
+				else
+				{
+					//redirect to Feature1 get request to reload  the data
+					res.redirect('Feature1');
+					//Note- for your feature you will be using redirect and not render
+				}
+			});
+		}
+	});
+});
+
 //POST REQUEST TO UPDATE THE USER CONTACT INFO
 app.post('/Feature1_edit_contact', (req, res) => {
 	q='UPDATE Users SET email=?,githubURL=?, facebookURL=?, twitterURL=? WHERE userID=?'
